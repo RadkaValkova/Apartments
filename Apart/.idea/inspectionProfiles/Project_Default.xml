@@ -1,0 +1,14 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="Inheritance.zoo_02.project.reptile.Animal" />
+          <option value="Polymorphism.wild_farm_04.project.animals.mammals.Mammal" />
+          <option value="Polymorphism.wild_farm_04.project.animals.animal.Hens" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
