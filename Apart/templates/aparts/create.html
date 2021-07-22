@@ -1,0 +1,66 @@
+{% extends 'shared/base_tamplete.html' %}
+
+{% block head_title %}Публикувай обява{% endblock %}
+
+{% block content %}
+    <style>
+        body {
+            background-image: url('/static/images/double-bubble-outline.png')
+        }
+    </style>
+    <h1 class="display-4 text-center">Моля, попълнете формата!</h1>
+
+    <form method="post" class="m-auto w-25" action="{% url 'create' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.errors }}
+        <label for="id_type">Вид</label>
+        {{ form.type }}
+
+        <label for="id_town">Град</label>
+        {{ form.town }}
+
+        <label for="id_construction">Конструкция</label>
+        {{ form.construction }}
+
+        <label for="id_construction_year">Година на построяване</label>
+        {{ form.construction_year }}
+
+        <label for="id_deal">Вид сделка</label>
+        {{ form.deal }}
+
+        <label for="id_status">Статус</label>
+        {{ form.status }}
+
+        <label for="id_price_offer">Офертна цена</label>
+        {{ form.price_offer }}
+
+        <label for="id_price_realized">Реализирана цена</label>
+        {{ form.price_realized }}
+
+        <label for="id_pure_area">Застроена площ / Чиста жилищна площ</label>
+        {{ form.pure_area }}
+
+        <label for="id_total_area">Площ / РЗП</label>
+        {{ form.total_area }}
+
+        <label for="id_finishing_works">Довършителни работи</label>
+        {{ form.finishing_works }}
+
+        <label for="id_furnishing">Обзавеждане</label>
+        {{ form.furnishing }}
+
+        <label for="id_description">Описание</label>
+        {{ form.description }}
+
+        <label for="id_picture">Снимка</label>
+        {{ form.image }}
+
+        <label for="id_email">e-mail</label>
+        {{ form.email }}
+
+        <label for="id_contact_phone">Телефон за контакт</label>
+        {{ form.contact_phone }}
+
+        <button type="submit" class="btn btn-lg btn-secondary">Публикувай</button>
+    </form>
+{% endblock %}

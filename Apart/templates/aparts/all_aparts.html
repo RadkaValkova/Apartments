@@ -1,0 +1,42 @@
+{% extends 'shared/base_tamplete.html' %}
+
+{% block head_title %}Всички обяви{% endblock %}
+
+{% block styles %}
+    <style>
+        body {
+            background-image: url('/static/images/double-bubble-outline.png')
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form action="{% url 'all aparts' %}" method="get">
+            {{ form }}
+            <button type="submit" class="btn btn-lg btn-secondary">Филтрирай</button>
+            <a href="{% url 'all aparts' %}" class="btn btn-primary">Изчисти филтъра</a>
+        </form>
+    </div>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            {% for apart in aparts %}
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="{{ apart.image.url }}" class="card-img-top" alt="....">
+                        <div class="card-body">
+                            <h6 class="card-title"> Тип: {{ apart.type }}</h6>
+                            <h6 class="card-title"> Град: {{ apart.town }}</h6>
+                            <h6 class="card-title"> Цена: {{ apart.price_offer }} EUR</h6>
+                            <h6 class="card-title"> РЗП: {{ apart.total_area }} m2</h6>
+                            <h6 class="card-title"> Конструкция: {{ apart.construction }}</h6>
+                            <h6 class="card-title"> Година на построяване: {{ apart.construction_year }} год.</h6>
+                            <a href="{% url 'apart details' apart.id %}" class="btn btn-primary">Детайли</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'shared/base_tamplete.html' %}
+
+{% block head_title %}Начало{% endblock %}
+
+{% block styles %}
+    <style>
+        body {
+            background-image: url('/static/images/memphis-mini.png')
+        }
+
+        .lead {
+            font-size: 20px
+        }
+
+        .col-lg-6 {
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        .btn {
+            margin-top: 15px
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div style="background-image: url('/static/images/home_page_picture.jpg');  background-repeat: no-repeat; background-position: center;
+            text-align: center; padding-top: 20px; padding-left: 15px; padding-right: 15px; right:auto;  margin-top:5px; height: 500px;">
+            <div style="font-size: 30px; font-weight: bold">
+                <p> БЕЗ ЗНАЧЕНИЕ ДАЛИ ИСКАТЕ ДА ЗАКУПИТЕ ЖИЛИЩЕ,</p>
+            </div>
+            <div style="font-size: 25px; font-weight: bold">
+                <p>ДА ПРОДАДЕТЕ СВОЕТО ИЛИ ДА ПОЛУЧИТЕ КОНСУЛТАЦИЯ ЗА ВАШИЯ ИМОТ,</p>
+            </div>
+            <div style="font-size: 25px; font-weight: bold">
+                <p>ТУК ЩЕ НАМЕРИТЕ ВАШЕТО РЕШЕНИЕ!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="jumbotron parent" style="background-color: whitesmoke; padding-top:20px">
+            <div class="absolute">
+                <div class="inner cover">
+                    <p style="text-align: center; font-size:20px; margin-top: 30px; margin-bottom: 30px">
+                        Ние сме екип от екперти с дългогодишен опит в сферата на недвижимите имоти.
+                        Тук сме, за да ви помогнем да реализирате и управлявате вашите активи или
+                        за да получите представа за техните пазарни и инвестиционни стойности.
+                    </p>
+                    <hr class="my-2">
+                    <div class="row" style="margin-top: 20px">
+                        <div class="col-lg-6">
+                            <p class="lead">Пазарът на недвижими имоти е динамичен и това да бъдете запознати с него е
+                                част от взимането на добро решение при покупка или продажба на ваш актив. Тук можете да
+                                намерите информация за новините в бранша.<br>
+                                <a href="{% url 'all market info' %}" class="btn btn-secondary">
+                                    Пазарна информация </a>
+                            </p>
+                        </div>
+                        <div class="col-lg-6">
+                            <p class="lead">Искате изготвяне на пазарна оценка на имот? Имате нужда от консултация за
+                                актив, който притежавате, който искате да закупите,наемете или отдадете под наем?
+                                Свържете се с нас <br>
+                                <a href="{% url 'create inquiry' %}" class="btn btn-secondary">Изпратете запитване</a>
+                            </p>
+                        </div>
+                        {% if not request.user.is_authenticated %}
+                            <div class="col-lg-6">
+                                <p class="lead">Ако сте регистриран потребител и искате да публикувате нова обява<br>
+                                    <a href="{% url 'log in user' %}" class="btn btn-secondary">Влезте в профила си</a>
+                                </p>
+                            </div>
+                            <div class="col-lg-6">
+                                <p class="lead">Ако не сте регистриран потребител може да направите регистрацията си тук<br>
+                                    <a href="{% url 'register user' %}" class="btn btn-secondary">Регистрирайте се</a>
+                                </p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+

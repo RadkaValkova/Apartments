@@ -1,0 +1,48 @@
+{% extends 'shared/base_tamplete.html' %}
+
+{% block head_title %}Запитване{% endblock %}
+
+{#{% block sidebar %}#}
+{#    <h1>This is sidebar</h1>#}
+{#{% endblock %}#}
+{% block styles %}
+    <style>
+        body {
+            background-image: url('/static/images/double-bubble-outline.png')
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h3 class="display-4 text-center">Моля, попълнете формата!</h3>
+    <div class="container" style="background-color: whitesmoke; margin-bottom: 10px">
+        <form method="post" class="m-auto w-25">
+            {% csrf_token %}
+            {{ form.errors }}
+
+            <label for="id_first_name">Категория/тема</label>
+            {{ form.category }}
+
+            <label for="id_first_name">Име</label>
+            {{ form.first_name }}
+
+            <label for="id_last_name">Презиме</label>
+            {{ form.last_name }}
+
+            <label for="id_town">Град</label>
+            {{ form.town }}
+
+            <label for="id_phone">Телефон</label>
+            {{ form.phone }}
+
+            <label for="id_email">e-mail</label>
+            {{ form.email }}
+
+            <label for="id_text">Вашето запитване</label>
+            {{ form.text }}
+
+            <button type="submit" class="btn btn-lg btn-secondary">Изпрати</button>
+        </form>
+    </div>
+{% endblock %}
+

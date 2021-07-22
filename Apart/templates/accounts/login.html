@@ -1,0 +1,22 @@
+{% extends 'shared/base_tamplete.html' %}
+
+{% block styles %}
+    <style>
+        body {
+            background-image: url('/static/images/double-bubble-outline.png')
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <form class="w-50 m-auto" method="post" style="border: 1px solid grey; margin: 10% 0%; padding: 5% 5%; background-color: whitesmoke;"
+              action="{% url 'log in user' %}">
+            <h2>Login</h2>
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="btn btn-primary">Login</button><br>
+            <span>Not registered yet?<a href="{% url 'register user' %}" style="color:orange">Register here</a></span>
+        </form>
+    </div>
+{% endblock %}
