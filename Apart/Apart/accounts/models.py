@@ -30,7 +30,7 @@ class Profile(models.Model):
     # )
     image_url = models.URLField(
         blank=True,
-    ) # правя го така, защото не съм оправила медия файловете
+    )
 
     user = models.OneToOneField(
         ApartUser,

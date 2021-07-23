@@ -5,7 +5,6 @@ from Apart.apart_app.views import create_apart, edit_apart, all_aparts, apart_de
 
 urlpatterns = [
     path('', home_page, name='home page'),
-    # path('contacts/', see_contacts, name= 'see contacts'),
     path('create/',create_apart, name='create'),
     path('all/', all_aparts, name='all aparts'),
     path('details/<int:pk>', apart_details, name='apart details'),

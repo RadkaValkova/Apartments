@@ -14,11 +14,11 @@
     <div class="col-lg-3"></div>
     <div class="col-lg-6">
           <form style="background-color: whitesmoke; border: 1px solid grey; margin: 10% 0%; padding: 10% 5%" method="post">
-            <h2>Sign up</h2>
+            <h2>Моля, попълнете формата за регистрация</h2>
             {% csrf_token %}
               {{ form }}
-            <button class="btn btn-primary" type="submit">Sign up</button><br>
-            <span>Have an account?<a href="{% url 'log in user' %}" style="color:orange">Sign in here</a></span>
+            <button class="btn btn-primary" type="submit">Регистрирай</button><br>
+            <span>Вече имате профил?<a href="{% url 'log in user' %}" style="color:orange">Влезте в профила си</a></span>
           </form>
     </div>
     <div class="col-lg-3"></div>

@@ -41,6 +41,7 @@ def logout_user(request):
     logout(request)
     return redirect('home page')
 
+
 @login_required
 def profile_details(request):
     profile = Profile.objects.get(pk=request.user.id)

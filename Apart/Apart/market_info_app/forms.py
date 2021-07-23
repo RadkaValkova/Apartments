@@ -25,9 +25,9 @@ class CreateMarketInfoForm(MarketInfoForm):
     pass
 
 
-class EditMarketInfoForm(MarketInfoForm):
-    pass
-
-
-class DeleteMarketInfoForm(MarketInfoForm):
-    pass
+# class EditMarketInfoForm(MarketInfoForm):
+#     pass
+#
+#
+# class DeleteMarketInfoForm(MarketInfoForm):
+#     pass

@@ -1,7 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
-from Apart.apart_app.apart_choices import TYPE_CHOICES
 from Apart.apart_app.forms import CreateApartmentForm, EditApartmentForm, FilterApartsForm
 from Apart.apart_app.models import ApartmentModel, TypeModel
 
@@ -10,31 +9,11 @@ def home_page(request):
     return render(request, 'home_page.html')
 
 
-def filter_values(value):
-    town = value['town'] if 'town' in value else ''
-    type = value['type'] if 'type' in value else ''
-    return {
-        'town': town,
-        'type': type,
-    }
-
-
 def all_aparts(request):
     aparts_list = ApartmentModel.objects.filter(status__name='активна обява')
-
-    values = filter_values(request.GET)
-    town = values['town']
-    type = values['type']
-    if town:
-        aparts_list = aparts_list.filter(town__iexact=town)
-    if type:
-        aparts_list = aparts_list.filter(type__iexact=type)
-
     context = {
         'aparts': aparts_list,
-        'form': FilterApartsForm()
     }
-
     return render(request, 'aparts/all_aparts.html', context)
 
 
@@ -84,7 +63,7 @@ def edit_apart(request, pk):
         form = EditApartmentForm(request.POST, request.FILES, instance=apart)
         if form.is_valid():
             form.save()
-            return redirect('all aparts')
+            return redirect('profile details')
 
         context = {
             'form': form,
@@ -92,41 +71,17 @@ def edit_apart(request, pk):
         }
         return render(request, 'aparts/edit.html', context)
 
-    # if request.method == 'POST':
-    #     form = EditApartmentForm(request.POST, request.FILES, instance=apart)
-    #     if form.is_valid():
-    #         form.save()
-    #         return redirect('all aparts')
-    # context = {
-    #     'form': EditApartmentForm(instance=apart),
-    #     'apart': apart,
-    # }
-    # return render(request, 'edit.html', context)
-
 
 @login_required
 def delete_apart(request, pk):
     apart = ApartmentModel.objects.get(pk=pk)
     if request.method == 'POST':
         apart.delete()
-        return redirect('all aparts')
+        return redirect('profile details')
 
     context = {
         'apart': apart,
     }
     return render(request, 'aparts/delete.html', context)
 
-# def filter_apart(request):
-#     aparts = ApartmentModel.objects.filter(status__name='активна обява')
-#
-#     values = filter_values(request.GET)
-#     town = values['town']
-#     if town:
-#         aparts = aparts.filter(town__iexact=town)
-#
-#     context = {
-#         'filtered_aparts': aparts,
-#         'form': FilterApartsForm()
-#     }
-#
-#     return render(request, 'all_aparts.html', context)''
+

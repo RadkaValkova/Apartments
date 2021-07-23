@@ -22,3 +22,4 @@ class Inquiry(models.Model):
     category = models.ForeignKey(CategoryModel, on_delete=models.SET_NULL, null=True)
     date = models.DateField(auto_now_add=True)
     text = models.TextField(max_length=1000)
+

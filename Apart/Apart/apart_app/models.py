@@ -57,22 +57,67 @@ class FinishingWorksModel(models.Model):
 
 
 class ApartmentModel(models.Model):
-    type = models.ForeignKey(TypeModel, on_delete=models.SET_NULL, null=True)
-    town = models.CharField(max_length=30)
-    construction = models.ForeignKey(ConstructionModel, on_delete=models.SET_NULL, null=True)
-    construction_year = models.CharField(max_length=4, blank=True)
-    deal = models.ForeignKey(DealModel, on_delete=models.SET_NULL, null=True)
-    status = models.ForeignKey(StatusModel, on_delete=models.SET_NULL, null=True)
+    type = models.ForeignKey(
+        TypeModel,
+        on_delete=models.SET_NULL,
+        null=True
+    )
+    town = models.CharField(
+        max_length=30,
+    )
+    construction = models.ForeignKey(
+        ConstructionModel,
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+    construction_year = models.CharField(
+        max_length=4,
+        blank=True,
+    )
+    deal = models.ForeignKey(
+        DealModel,
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+    status = models.ForeignKey(
+        StatusModel,
+        on_delete=models.SET_NULL,
+        null=True,
+    )
     price_offer = models.PositiveIntegerField()
-    price_realized = models.PositiveIntegerField(null=True, blank=True, default=0)  # admin and user only
+
+    price_realized = models.PositiveIntegerField(
+        null=True,
+        blank=True,
+        default=0
+    )
+
     pure_area = models.PositiveIntegerField()
+
     total_area = models.PositiveIntegerField()
-    finishing_works = models.ForeignKey(FinishingWorksModel, on_delete=models.SET_NULL, null=True)
-    furnishing = models.ForeignKey(FurnishingModel, on_delete=models.SET_NULL, null=True)
-    description = models.TextField(max_length=1000)
-    image = models.ImageField(upload_to='aparts')
-    date = models.DateTimeField(auto_now_add=True)  # blank=False
+
+    finishing_works = models.ForeignKey(
+        FinishingWorksModel,
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+    furnishing = models.ForeignKey(
+        FurnishingModel,
+        on_delete=models.SET_NULL,
+        null=True,
+    )
+    description = models.TextField(
+        max_length=1000,
+    )
+    image = models.ImageField(
+        upload_to='aparts',
+    )
+    date = models.DateTimeField(
+        auto_now_add=True,
+    )  # blank=False
+
     email = models.EmailField()
+
     contact_phone = models.IntegerField()
 
     user = models.ForeignKey(
@@ -80,9 +125,3 @@ class ApartmentModel(models.Model):
         on_delete=models.CASCADE,
     )
 
-
-
-# class ApartFilterModel(models.Model):
-#     town = models.CharField(max_length=20)
-#     type = models.CharField(max_length=20)
-    # construction = models.CharField(max_length=20, choices=CONSTRUCTION_CHOICES)

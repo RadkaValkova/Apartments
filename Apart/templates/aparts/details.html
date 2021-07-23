@@ -20,15 +20,23 @@
                 <div class="d-flex justify-content-between">
                     <ul>
                         <h5>Код на обявата: {{ apart.pk }}</h5>
-                        <h5>Тип: {{ apart.type }}</h5>
-                        <h5>Град: {{ apart.town }}</h5>
-                        <h5>Застроена площ: {{ apart.pure_area }}</h5>
-                        <h5>РЗП: {{ apart.total_area }}</h5>
-                        <h5>Година на построяване: {{ apart.construction_year }} год.</h5>
                     </ul>
                 </div>
-                <p class="mt-5"><b>Описание:</b> <br>{{ apart.description }}</p>
-                <p class="mt-5"><b>Телефон за контакт:</b><br>{{ apart.contact_phone }}</p>
+                <ul>
+                    <li><b>Тип:</b> {{ apart.type }}</li>
+                    <li><b>Град:</b> {{ apart.town }}</li>
+                    <li><b>Застроена площ:</b> {{ apart.pure_area }} кв.м.</li>
+                    <li><b>РЗП:</b> {{ apart.total_area }} кв.м.</li>
+                    <li><b>Конструкция:</b> {{ apart.construction }}</li>
+                    <li><b>Година на построяване:</b> {{ apart.construction_year }} год.</li>
+                    <li><b>Обзавеждане:</b> {{ apart.furnishing }}</li>
+                    <li><b>Довършителни работи:</b> {{ apart.finishing_works }}</li>
+                    <li><b>Вид сделка:</b> {{ apart.deal }}</li>
+                    <li><b>Статус:</b> {{ apart.status }}</li>
+
+                </ul>
+                <p><b>Описание:</b> <br>{{ apart.description }}</p>
+                <p><b>Телефон за контакт:</b><br>{{ apart.contact_phone }}</p>
 
                 {% if is_user %}
                     <div>
