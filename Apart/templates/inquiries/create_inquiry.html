@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-    <h3 class="display-4 text-center">Моля, попълнете формата!</h3>
+    <h3 class="display-6 text-center">Моля, попълнете формата!</h3>
     <div class="container" style="background-color: whitesmoke; margin-bottom: 10px">
         <form method="post" class="m-auto w-25">
             {% csrf_token %}
@@ -30,7 +30,7 @@
             <label for="id_town">Град</label>
             {{ form.town }}
 
-            <label for="id_phone">Телефон</label>
+            <label for="id_phone">Телефон за обратна връзка:</label>
             {{ form.phone }}
 
             <label for="id_email">e-mail</label>

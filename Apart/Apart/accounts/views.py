@@ -64,4 +64,37 @@ def profile_details(request):
         'aparts': user_aparts,
         'profile': profile,
     }
-    return render(request, 'accounts/user_profile.html', context)
+    return render(request, 'accounts/profile_details.html', context)
+
+
+@login_required
+def delete_user(request):
+    user = request.user
+    if request.POST:
+        user.delete()
+        return redirect('home page')
+    return render(request, 'accounts/delete_user.html')
+
+
+@login_required
+def edit_profile(request):
+    user_id = request.user.id
+    profile = Profile.objects.get(pk=user_id)
+    if request.POST:
+        form = ProfileForm(
+            request.POST,
+            request.FILES,
+            instance=profile,
+        )
+        if form.is_valid():
+            form.save()
+            return redirect('profile details')
+    else:
+        form = ProfileForm(
+            instance=profile,
+        )
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'accounts/edit_profile.html', context)

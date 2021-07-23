@@ -1,0 +1,24 @@
+{% extends 'shared/base_tamplete.html' %}
+
+{% block head_title %} Редактиране на {{ request.user }}{% endblock %}
+
+{% block styles %}
+    <style>
+        body {
+            background-image: url('/static/images/double-bubble-outline.png')
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h3 class="display-6 text-center">Моля, направете желаните корекции и ги потвърдете!</h3>
+    </div>
+    <div class="container" style="margin-bottom: 10px; text-align: center; padding-top:50px;padding-bottom: 50px;">
+        <form method="post" action="{% url 'edit profile' %}">
+            {% csrf_token %}
+            {{ form }}
+            <button class="btn btn-success">Обнови</button>
+        </form>
+    </div>
+{% endblock %}

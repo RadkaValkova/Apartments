@@ -11,7 +11,8 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="display-4 text-center">Моля, попълнете формата!</h1>
+
+    <h1 class="display-6 text-center">Моля, попълнете формата!</h1>
 
     <form method="post" class="m-auto w-25" action="{% url 'edit' apart.id %}" enctype="multipart/form-data">
         {% csrf_token %}

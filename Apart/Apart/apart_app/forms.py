@@ -25,10 +25,16 @@ class ApartmentForm(forms.ModelForm, BootstrapFormMixin):
         model = ApartmentModel
         exclude = ('user',)
         # fields = '__all__'
+
         town = forms.CharField(
             widget=forms.TextInput(attrs={'placeholder': 'въведете град'}),
             help_text='моля въведете град',
             validators=[]
+        )
+        price_realized = forms.IntegerField(
+            widget=forms.NumberInput(attrs={'placeholder': 'стойността се попълва след реализация'}),
+            help_text='полето не езадължително. попълва се след реализация',
+            validators=[positive_value_validator]
         )
 
     def clean_town(self):

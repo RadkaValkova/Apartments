@@ -1,0 +1,65 @@
+{% extends 'shared/base_tamplete.html' %}
+{% load static %}
+
+{% block styles %}
+    <style>
+        body {
+            background-image: url('/static/images/double-bubble-outline.png')
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <h1>Здравейте, {{ request.user }}!</h1>
+        <h5>Това е Вашият профил</h5>
+        {% if profile.image_url %}
+            <img class="rounded-circle mb-3" src="{{ profile.image_url }}" alt="" width="140"
+                 height="140">
+        {% else %}
+            <img class="rounded-circle mb-3" src="{% static 'images/profile_anonimous.webp' %}" alt="" width="140"
+                 height="140">
+        {% endif %}
+{#        <div class="w-50 m-auto">#}
+{#            <form action="{% url 'profile details' %}" method="post">#}
+{#                {% csrf_token %}#}
+{#                {{ form }}#}
+{#                <button class="btn btn-success">Обнови</button>#}
+{#            </form>#}
+{#        </div>#}
+        <div>
+            <a href="{% url 'edit profile' %}" class="btn btn-success">Редактирай</a>
+            <a href="{% url 'delete user' %}" class="btn btn-danger">Изтрий</a>
+        </div>
+
+    </div>
+    <hr>
+    {% if aparts %}
+        <div class="container">
+            <h2 class='text-center'>Вашите публикувани обяви</h2>
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                {% for apart in aparts %}
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="{{ apart.image.url }}" class="card-img-top" alt="....">
+                            <div class="card-body">
+                                <h6 class="card-title"> Тип: {{ apart.type }}</h6>
+                                <h6 class="card-title"> Град: {{ apart.town }}</h6>
+                                <h6 class="card-title"> Цена: {{ apart.price_offer }} EUR</h6>
+                                <h6 class="card-title"> РЗП: {{ apart.total_area }} m2</h6>
+                                <h6 class="card-title"> Конструкция: {{ apart.construction }}</h6>
+                                <h6 class="card-title"> Година на построяване: {{ apart.construction_year }} год.</h6>
+                                <a href="{% url 'apart details' apart.id %}" class="btn btn-primary">Детайли</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <div class="text-center">
+            <h2>Нямате публикувани обяви</h2>
+            <a href="{% url 'create' %}" class="btn btn-success">Добави обява</a>
+        </div>
+    {% endif %}
+{% endblock %}

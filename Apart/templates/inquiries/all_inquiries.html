@@ -14,24 +14,14 @@
     <h2 class='text-center'>Получени запитвания</h2>
     {% for inquiry in inquiries %}
         <div class="container" style="background-color: whitesmoke; margin-bottom: 10px">
-            <div>
-                <h5 class='text-left'>{{ inquiry.category }}</h5>
-            </div>
-            <div>
-                <label>Изпратено на:</label>
-                {{ inquiry.date }}
-            </div>
-            <div>
-                <label>Изпратил:</label>
-                {{ inquiry.first_name }} {{ inquiry.last_name }}
-            </div>
-            <div>
-                {{ inquiry.text }}
-            </div>
-            <div>
-                <div>тел: {{ inquiry.phone }}</div>
-                <div>e-mail: {{ inquiry.email }}</div>
-            </div>
+            <h5 class='text-left'><b>{{ inquiry.category }}</b></h5>
+            <ul>
+                <li><b>Получено на:</b> {{ inquiry.date }}</li>
+                <li><b>Изпратил:</b> {{ inquiry.first_name }} {{ inquiry.last_name }}</li>
+                <li><b>Описание на запитването:</b> {{ inquiry.text }}</li>
+                <li><b>Телефон за обратна връзка:</b> {{ inquiry.phone }}</li>
+                <li><b>e-mail:</b> {{ inquiry.email }}</li>
+            </ul>
         </div>
     {% endfor %}
 
