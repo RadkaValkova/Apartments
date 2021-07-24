@@ -81,11 +81,7 @@ def edit_profile(request):
     user_id = request.user.id
     profile = Profile.objects.get(pk=user_id)
     if request.POST:
-        form = ProfileForm(
-            request.POST,
-            request.FILES,
-            instance=profile,
-        )
+        form = ProfileForm(request.POST,request.FILES,instance=profile)
         if form.is_valid():
             form.save()
             return redirect('profile details')
@@ -96,5 +92,6 @@ def edit_profile(request):
 
     context = {
         'form': form,
+        'profile':profile,
     }
     return render(request, 'accounts/edit_profile.html', context)

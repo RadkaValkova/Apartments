@@ -23,7 +23,7 @@ def create_inquiry(request):
 
 
 def all_inquiries(request):
-    all_inquiries = Inquiry.objects.all()
+    all_inquiries = Inquiry.objects.order_by('id').reverse()
     context = {
         'inquiries': all_inquiries,
     }

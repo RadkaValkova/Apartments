@@ -12,6 +12,7 @@
 
 {% block content %}
     <div class="container" style="margin-bottom: 10px; text-align: center; padding-top:50px;padding-bottom: 50px;">
+        <h3>При изтриване на профила, всяка публикувана от Вас информация ще бъде изтрита.</h3>
         <h1>Сигурни ли сте, че искате да изтриете профила си?</h1>
         <div class="m-auto d-flex justify-content-center">
             <form action="{% url 'delete user' %}" method="post">

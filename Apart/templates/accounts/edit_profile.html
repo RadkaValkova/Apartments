@@ -1,5 +1,6 @@
 {% extends 'shared/base_tamplete.html' %}
 
+
 {% block head_title %} Редактиране на {{ request.user }}{% endblock %}
 
 {% block styles %}
@@ -11,14 +12,27 @@
 {% endblock %}
 
 {% block content %}
-    <div>
-        <h3 class="display-6 text-center">Моля, направете желаните корекции и ги потвърдете!</h3>
-    </div>
-    <div class="container" style="margin-bottom: 10px; text-align: center; padding-top:50px;padding-bottom: 50px;">
-        <form method="post" action="{% url 'edit profile' %}">
-            {% csrf_token %}
-            {{ form }}
-            <button class="btn btn-success">Обнови</button>
-        </form>
-    </div>
+
+    <h3 class="display-6 text-center">Моля, направете желаните корекции и ги потвърдете!</h3>
+
+    <form method="post" class="m-auto w-25" action="{% url 'edit profile' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.errors }}
+
+        <label for="id_first_name">Име</label>
+        {{ form.first_name }}
+
+        <label for="id_last_name">Фамилия</label>
+        {{ form.last_name }}
+
+        <label for="id_phone_number">Телефон за контакт</label>
+        {{ form.phone_number }}
+
+        <label for="id_profile_image">Профилна снимка</label>
+        {{ form.profile_image }}
+
+        <button class="btn btn-success">Обнови</button>
+        <a class="btn btn-primary" href="{% url 'profile details' %}">Откажи</a>
+    </form>
+
 {% endblock %}

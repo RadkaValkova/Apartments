@@ -10,25 +10,18 @@
 {% endblock %}
 
 {% block content %}
-    <div class="text-center">
-        <h1>Здравейте, {{ request.user }}!</h1>
+    <div class="text-lg-start" style="margin-left: 200px">
+        <h1>Здравейте, {{ profile.first_name }}!</h1>
         <h5>Това е Вашият профил</h5>
-        {% if profile.image_url %}
-            <img class="rounded-circle mb-3" src="{{ profile.image_url }}" alt="" width="140"
+        {% if profile.profile_image %}
+            <img class="mb-3" src="{{ profile.profile_image.url }}" alt="" width="140"
                  height="140">
         {% else %}
-            <img class="rounded-circle mb-3" src="{% static 'images/profile_anonimous.webp' %}" alt="" width="140"
-                 height="140">
+            <img class=" mb-3" src="{% static 'images/profile_anonimous.webp' %}" alt="" width="140" height="140">
         {% endif %}
-{#        <div class="w-50 m-auto">#}
-{#            <form action="{% url 'profile details' %}" method="post">#}
-{#                {% csrf_token %}#}
-{#                {{ form }}#}
-{#                <button class="btn btn-success">Обнови</button>#}
-{#            </form>#}
-{#        </div>#}
+
         <div>
-            <a href="{% url 'edit profile' %}" class="btn btn-success">Редактирай</a>
+            <a href="{% url 'edit profile' %}" class="btn btn-primary">Завърши профила си</a>
             <a href="{% url 'delete user' %}" class="btn btn-danger">Изтрий</a>
         </div>
 
@@ -49,7 +42,7 @@
                                 <h6 class="card-title"> РЗП: {{ apart.total_area }} m2</h6>
                                 <h6 class="card-title"> Конструкция: {{ apart.construction }}</h6>
                                 <h6 class="card-title"> Година на построяване: {{ apart.construction_year }} год.</h6>
-                                <a href="{% url 'apart details' apart.id %}" class="btn btn-primary">Детайли</a>
+                                <a href="{% url 'apart details' apart.id %}" class="btn btn-lg btn-secondary">Детайли</a>
                             </div>
                         </div>
                     </div>

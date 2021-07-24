@@ -13,7 +13,7 @@
 {% block content %}
 
     <h1 class="display-6 text-center">Моля, попълнете формата!</h1>
-
+ <div class="container" style="background-image: url('/static/images/home_page_picture_changed.jpg'); margin-bottom: 10px">
     <form method="post" class="m-auto w-25" action="{% url 'edit' apart.id %}" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.errors }}
@@ -67,5 +67,7 @@
         {{ form.contact_phone }}
 
         <button type="submit" class="btn btn-lg btn-secondary">Редактирай</button>
+        <a class="btn btn-primary" href="{% url 'apart details' apart.id %}">Откажи</a>
     </form>
+ </div>
 {% endblock %}

@@ -22,7 +22,7 @@ def create_market_info(request):
 
 
 def all_market_info(request):
-    infos = MarketInfoModel.objects.all()
+    infos = MarketInfoModel.objects.order_by('published_date').reverse()
     context = {
         'infos': infos,
     }

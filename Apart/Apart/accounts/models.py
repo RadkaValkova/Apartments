@@ -24,12 +24,22 @@ class ApartUser(AbstractBaseUser, PermissionsMixin):
 
 
 class Profile(models.Model):
-    # profile_image = models.ImageField(
-    #     upload_to='profiles',
-    #     blank=True,
-    # )
-    image_url = models.URLField(
+    profile_image = models.ImageField(
+        upload_to='profiles',
         blank=True,
+    )
+    first_name = models.CharField(
+        max_length=20,
+        blank=True
+    )
+    last_name = models.CharField(
+        max_length=20,
+        blank=True
+    )
+
+    phone_number = models.CharField(
+        max_length=20,
+        blank=True
     )
 
     user = models.OneToOneField(
