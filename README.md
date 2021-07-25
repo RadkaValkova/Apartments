@@ -1,3 +1,3 @@
 # Apartments
  Apartments - exam project
-Структуря на праук
+Структура на проекта
