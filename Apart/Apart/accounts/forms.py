@@ -87,7 +87,7 @@ class RegisterForm(UserCreationForm):
         }
 
 
-class ProfileForm(forms.ModelForm, BootstrapFormMixin):
+class ProfileForm(BootstrapFormMixin, forms.ModelForm):
     # def save(self, commit=True):
     #     db_apart = Profile.objects.get(pk=self.instance.id)
     #     if commit:

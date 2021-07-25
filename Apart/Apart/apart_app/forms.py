@@ -4,7 +4,8 @@ from os.path import join
 from django import forms
 from django.conf import settings
 
-from Apart.apart_app.models import ApartmentModel
+from Apart.apart_app.apart_choices import TYPE_CHOICES
+from Apart.apart_app.models import ApartmentModel, TownModel, TypeModel, ConstructionModel, DealModel
 from Apart.apart_app.validators import positive_value_validator
 
 
@@ -55,5 +56,34 @@ class EditApartmentForm(ApartmentForm):
         fields = '__all__'
 
 
-class FilterApartsForm(forms.Form):
-    pass
+class FilterApartsForm(BootstrapFormMixin, forms.Form):
+
+    id = forms.IntegerField(
+        required=False,
+        widget=forms.HiddenInput()
+    )
+    town = forms.CharField(
+        max_length=30,
+        required=False,
+        label='Град',
+        help_text='Моля, попълнете град, в който търсите имот.'
+    )
+    type = forms.ModelChoiceField(
+        queryset=TypeModel.objects.all(),
+        required=False,
+        label='Вид',
+        help_text='Моля, изберете от падащото меню, вид на имота, който търсите.'
+    )
+    construction = forms.ModelChoiceField(
+        queryset=ConstructionModel.objects.all(),
+        required=False,
+        label='Конструкция',
+        help_text='Моля, изберете от падащото меню, тип конструкция.'
+    )
+    deal = forms.ModelChoiceField(
+        queryset=DealModel.objects.all(),
+        required=False,
+        label='Вид сделка',
+        help_text='Моля, изберете от падащото меню видът на сделката.'
+    )
+

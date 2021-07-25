@@ -8,11 +8,41 @@ from Apart.apart_app.models import ApartmentModel, TypeModel
 def home_page(request):
     return render(request, 'home_page.html')
 
+def get_filter_values(values):
+    town = values['town'] if 'town' in values else ''
+    type = values['type'] if 'type' in values else ''
+    construction = values['construction'] if 'construction' in values else ''
+    deal = values['deal'] if 'deal' in values else ''
+
+    return {
+        'town': town,
+        'type': type,
+        'construction': construction,
+        'deal': deal,
+    }
 
 def all_aparts(request):
     aparts_list = ApartmentModel.objects.filter(status__name='активна обява')
+    form = FilterApartsForm()
+
+    values = get_filter_values(request.GET)
+    town = values['town']
+    type = values['type']
+    construction = values['construction']
+    deal = values['deal']
+
+    if town:
+        aparts_list = aparts_list.filter(town__iexact=town)
+    if type:
+        aparts_list = aparts_list.filter(type=type)
+    if construction:
+        aparts_list = aparts_list.filter(construction=construction)
+    if deal:
+        aparts_list = aparts_list.filter(deal=deal)
+
     context = {
         'aparts': aparts_list,
+        'form': form
     }
     return render(request, 'aparts/all_aparts.html', context)
 
