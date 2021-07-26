@@ -31,3 +31,16 @@ class CreateMarketInfoForm(MarketInfoForm):
 #
 # class DeleteMarketInfoForm(MarketInfoForm):
 #     pass
+
+class SearchMarketInfoForm(forms.Form):
+    id = forms.IntegerField(
+        required=False,
+        widget=forms.HiddenInput()
+    )
+    key_word = forms.CharField(
+        max_length=30,
+        required=False,
+        label='Ключова дума',
+        help_text='Моля, попълнете ключова дума, по която публикация.'
+
+    )

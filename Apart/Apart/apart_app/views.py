@@ -8,6 +8,7 @@ from Apart.apart_app.models import ApartmentModel, TypeModel
 def home_page(request):
     return render(request, 'home_page.html')
 
+
 def get_filter_values(values):
     town = values['town'] if 'town' in values else ''
     type = values['type'] if 'type' in values else ''
@@ -20,6 +21,7 @@ def get_filter_values(values):
         'construction': construction,
         'deal': deal,
     }
+
 
 def all_aparts(request):
     aparts_list = ApartmentModel.objects.filter(status__name='активна обява')
@@ -113,5 +115,6 @@ def delete_apart(request, pk):
         'apart': apart,
     }
     return render(request, 'aparts/delete.html', context)
+
 
 

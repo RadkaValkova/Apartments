@@ -12,10 +12,13 @@
 
 {% block content %}
     <div class="container">
-        <form action="#" method="get">
-            {{ form.as_p }}
-            <button type="submit" class="btn btn-lg btn-secondary">Филтрирай</button>
-            <a href="{% url 'all aparts' %}" class="btn btn-primary">Изчисти филтъра</a>
+        <form action="#" method="get" style="text-align: center; padding-bottom: 40px">
+
+                <h4>Може да разгледате всичките ни обяви или да потърсите имот по желани от Вас критерии.</h4>
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-lg btn-secondary">Филтрирай</button>
+                <a href="{% url 'all aparts' %}" class="btn btn-primary">Изчисти филтъра</a>
+
         </form>
     </div>
     <div class="container">

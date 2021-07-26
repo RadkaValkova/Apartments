@@ -1,8 +1,4 @@
-import os
-from os.path import join
-
 from django import forms
-from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
@@ -20,7 +16,6 @@ class LoginForm(forms.Form):
         widget=forms.EmailInput(
             attrs={
                 'placeholder': 'Въведете Вашият e-mail',
-                'style': 'width: 450px',
             }
         )
     )
@@ -29,7 +24,6 @@ class LoginForm(forms.Form):
         widget=forms.PasswordInput(
             attrs={
                 'placeholder': 'Въведете паролата си',
-                'style': 'width: 300px',
             }
         ),
     )
@@ -53,25 +47,20 @@ class RegisterForm(UserCreationForm):
         strip=False,
         widget=forms.PasswordInput(
             attrs={
-                'placeholder': 'Въведете паролата си',
-                'style': 'width: 500px'
+                'placeholder': 'Въведете парола',
+                'style': 'width: 300px'
             }
         ),
-        help_text='Паролата Ви не може да бъде твърде подобна на другите Ви лични данни. \n '
-                  'Паролата Ви трябва да съдържа поне 8 знака.\n'
-                  'Паролата Ви не може да бъде често използвана парола.\n'
-                  'Паролата Ви не може да бъде изцяло цифрова. \n',
     )
     password2 = forms.CharField(
         label='Потвърждаване на парола',
         strip=False,
         widget=forms.PasswordInput(
             attrs={
-                'placeholder': 'Моля, въведете повторно паролата',
-                'style': 'width: 500px'
+                'placeholder': 'Въведете повторно паролата си',
+                'style': 'width: 300px'
             }
         ),
-        help_text='Въведете същата парола като преди, за проверка. ',
     )
 
     class Meta:
@@ -81,7 +70,7 @@ class RegisterForm(UserCreationForm):
             'email': forms.EmailInput(
                 attrs={
                     'placeholder': 'Моля, въведете e-mail',
-                    'style': 'width: 650px'
+                    'style': 'width: 500px'
                 }
             ),
         }

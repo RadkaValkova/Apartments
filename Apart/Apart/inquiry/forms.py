@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from Apart.inquiry.models import Inquiry
+from Apart.inquiry.models import Inquiry, CategoryModel
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -31,3 +31,28 @@ class InquiryForm(forms.ModelForm, BootstrapFormMixin):
     def clean_town(self):
         return self.cleaned_data['town'].capitalize()
 
+
+class FilterInquiryForm(BootstrapFormMixin, forms.Form):
+    id = forms.IntegerField(
+        required=False,
+        widget=forms.HiddenInput()
+    )
+
+    category = forms.ModelChoiceField(
+        queryset=CategoryModel.objects.all(),
+        required=False,
+        label='Категория',
+        help_text='Филтър по категория на запитването'
+    )
+    first_name = forms.CharField(
+        max_length=30,
+        required=False,
+        label='Име',
+        help_text='Филтър по име.'
+    )
+    last_name = forms.CharField(
+        max_length=30,
+        required=False,
+        label='Фамилия',
+        help_text='Филтър по фамилия.'
+    )
