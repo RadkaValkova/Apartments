@@ -2,8 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from Apart.apart_app.forms import CreateApartmentForm, EditApartmentForm, FilterApartsForm
-from Apart.apart_app.models import ApartmentModel, TypeModel
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from Apart.apart_app.models import ApartmentModel
+
+from Apart.core.views import pagination
 
 
 def home_page(request):
@@ -28,15 +29,6 @@ def all_aparts(request):
     aparts_list = ApartmentModel.objects.filter(status__name='активна обява')
     form = FilterApartsForm()
 
-    paginator = Paginator(aparts_list, 8)
-    page = request.GET.get('page')
-    try:
-        aparts_list = paginator.page(page)
-    except PageNotAnInteger:
-        aparts_list = paginator.page(1)
-    except EmptyPage:
-        aparts_list = paginator.page(paginator.num_pages)
-
     values = get_filter_values(request.GET)
     town = values['town']
     type = values['type']
@@ -52,12 +44,14 @@ def all_aparts(request):
     if deal:
         aparts_list = aparts_list.filter(deal=deal)
 
-    context = {
-        'aparts': aparts_list,
-        'form': form,
-        'page': page,
+    if form.is_valid():
+        form.save()
 
+    context = {
+        'aparts': pagination(request, aparts_list, 12),
+        'form': form,
     }
+
     return render(request, 'aparts/all_aparts.html', context)
 
 

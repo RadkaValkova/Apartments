@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from Apart.accounts.forms import LoginForm, RegisterForm, ProfileForm
 from Apart.accounts.models import Profile
 from Apart.apart_app.models import ApartmentModel
+from Apart.core.views import pagination
 
 
 def login_user(request):
@@ -61,7 +62,7 @@ def profile_details(request):
 
     context = {
         'form': form,
-        'aparts': user_aparts,
+        'aparts': pagination(request,user_aparts,8),
         'profile': profile,
     }
     return render(request, 'accounts/profile_details.html', context)
