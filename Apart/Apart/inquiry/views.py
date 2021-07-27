@@ -49,6 +49,9 @@ def all_inquiries(request):
     if last_name:
         inquiries = inquiries.filter(last_name__iexact=last_name)
 
+    if request.method == 'GET':
+        if form.is_valid():
+            form.save()
     context = {
         'inquiries': inquiries,
         'form': form,

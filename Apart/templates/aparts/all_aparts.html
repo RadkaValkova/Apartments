@@ -14,10 +14,10 @@
     <div class="container">
         <form action="#" method="get" style="text-align: center; padding-bottom: 40px">
 
-                <h4>Може да разгледате всичките ни обяви или да потърсите имот по желани от Вас критерии.</h4>
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-lg btn-secondary">Филтрирай</button>
-                <a href="{% url 'all aparts' %}" class="btn btn-primary">Изчисти филтъра</a>
+            <h4>Може да разгледате всичките ни обяви или да потърсите имот по желани от Вас критерии.</h4>
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-lg btn-secondary">Филтрирай</button>
+            <a href="{% url 'all aparts' %}" class="btn btn-primary">Изчисти филтъра</a>
 
         </form>
     </div>
@@ -41,5 +41,18 @@
             {% endfor %}
         </div>
     </div>
+
+    {% if aparts.has_other_pages %}
+        <nav aria-label="Page navigation conatiner">
+            <ul class="pagination justify-content-center">
+                {% if aparts.has_previous %}
+                    <li><a href="?page={{ aparts.previous_page_number }}" class="page-link">&laquo; PREV </a></li>
+                {% endif %}
+                {% if aparts.has_next %}
+                    <li><a href="?page={{ aparts.next_page_number }}" class="page-link"> NEXT &raquo;</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    {% endif %}
 
 {% endblock %}

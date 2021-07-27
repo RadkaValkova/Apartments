@@ -1,6 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
+from Apart.core.validators import max_length_validator
 from Apart.inquiry.models import Inquiry, CategoryModel
 from django.utils.translation import ugettext_lazy as _
 
@@ -23,13 +24,22 @@ class InquiryForm(forms.ModelForm, BootstrapFormMixin):
         fields = '__all__'
 
     def clean_first_name(self):
-        return self.cleaned_data['first_name'].capitalize()
+        data = self.cleaned_data['first_name']
+        if data[0].islower():
+            raise ValidationError('Изпишете името с главна буква')
+        return data
 
     def clean_last_name(self):
-        return self.cleaned_data['last_name'].capitalize()
+        data = self.cleaned_data['last_name']
+        if data[0].islower():
+            raise ValidationError('Изпишете фамилията с главна буква')
+        return data
 
     def clean_town(self):
-        return self.cleaned_data['town'].capitalize()
+        data = self.cleaned_data['town']
+        if data[0].islower():
+            raise ValidationError('Изпишете градът с главна буква')
+        return data
 
 
 class FilterInquiryForm(BootstrapFormMixin, forms.Form):
@@ -42,17 +52,17 @@ class FilterInquiryForm(BootstrapFormMixin, forms.Form):
         queryset=CategoryModel.objects.all(),
         required=False,
         label='Категория',
-        help_text='Филтър по категория на запитването'
+        help_text='Филтър по категория на запитването',
     )
     first_name = forms.CharField(
-        max_length=30,
+        max_length=15,
         required=False,
         label='Име',
-        help_text='Филтър по име.'
+        help_text='Филтър по име.',
     )
     last_name = forms.CharField(
-        max_length=30,
+        max_length=15,
         required=False,
         label='Фамилия',
-        help_text='Филтър по фамилия.'
+        help_text='Филтър по фамилия.',
     )

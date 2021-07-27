@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 
 from Apart.apart_app.forms import CreateApartmentForm, EditApartmentForm, FilterApartsForm
 from Apart.apart_app.models import ApartmentModel, TypeModel
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 
 def home_page(request):
@@ -27,6 +28,15 @@ def all_aparts(request):
     aparts_list = ApartmentModel.objects.filter(status__name='активна обява')
     form = FilterApartsForm()
 
+    paginator = Paginator(aparts_list, 8)
+    page = request.GET.get('page')
+    try:
+        aparts_list = paginator.page(page)
+    except PageNotAnInteger:
+        aparts_list = paginator.page(1)
+    except EmptyPage:
+        aparts_list = paginator.page(paginator.num_pages)
+
     values = get_filter_values(request.GET)
     town = values['town']
     type = values['type']
@@ -44,7 +54,9 @@ def all_aparts(request):
 
     context = {
         'aparts': aparts_list,
-        'form': form
+        'form': form,
+        'page': page,
+
     }
     return render(request, 'aparts/all_aparts.html', context)
 
@@ -115,6 +127,3 @@ def delete_apart(request, pk):
         'apart': apart,
     }
     return render(request, 'aparts/delete.html', context)
-
-
-

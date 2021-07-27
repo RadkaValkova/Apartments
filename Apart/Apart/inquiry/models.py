@@ -18,7 +18,7 @@ class Inquiry(models.Model):
     last_name = models.CharField(max_length=15)
     town = models.CharField(max_length=15)
     email = models.EmailField(max_length=30)
-    phone = models.IntegerField()
+    phone = models.CharField(max_length=20)
     category = models.ForeignKey(CategoryModel, on_delete=models.SET_NULL, null=True)
     date = models.DateField(auto_now_add=True)
     text = models.TextField(max_length=1000)
