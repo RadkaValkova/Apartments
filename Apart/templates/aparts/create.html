@@ -13,6 +13,7 @@
         <form method="post" class="m-auto w-25" action="{% url 'create' %}" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.errors }}
+
             <label for="id_type">Вид</label>
             {{ form.type }}
 

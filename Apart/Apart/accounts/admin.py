@@ -30,6 +30,8 @@ class ApartUserAdmin(UserAdmin):
 
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ['first_name', 'last_name', 'phone_number', 'user']
+    search_fields = ['first_name', 'last_name']
+    readonly_fields = ['first_name', 'last_name', 'phone_number', 'user', 'profile_image']
 
 
 admin.site.register(Profile, ProfileAdmin)

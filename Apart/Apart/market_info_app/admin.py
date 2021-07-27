@@ -7,7 +7,7 @@ class MarketInfoAdmin(admin.ModelAdmin):
     list_display = ('title', 'published_date')
     list_filter = ('published_date',)
     ordering = ('published_date',)
-    search_fields = ('title',)
+    search_fields = ('title', 'text')
 
 
 admin.site.register(MarketInfoModel, MarketInfoAdmin)

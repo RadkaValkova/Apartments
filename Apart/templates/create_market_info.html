@@ -1,0 +1,40 @@
+{% extends 'shared/base_tamplete.html' %}
+
+{% block head_title %}Пазарна информация{% endblock %}
+
+
+{% block styles %}
+    <style>
+        body {
+            background-image: url('/static/images/double-bubble-outline.png')
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h3 class="display-6 text-center">Моля, попълнете формата!</h3>
+    <div class="container" style="background-image: url('/static/images/home_page_picture_changed.jpg'); margin-bottom: 10px">
+        <form method="post" class="m-auto w-25">
+            {% csrf_token %}
+            {{ form.errors }}
+
+            <label for="id_title">Заглавие</label>
+            {{ form.title }}
+
+            <label for="id_published_data">Дата на публикуване</label>
+            {{ form.published_date }}
+
+            <label for="source">Източник</label>
+            {{ form.source }}
+
+            <label for="text">Текст</label>
+            {{ form.text }}
+
+            <label for="id_source_url">Линк към обявата</label>
+            {{ form.source_url }}
+
+            <button type="submit" class="btn btn-lg btn-secondary">Публикувай</button>
+            <a class="btn btn-primary" href="{% url 'all market info' %}">Откажи</a>
+        </form>
+    </div>
+{% endblock %}

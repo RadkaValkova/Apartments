@@ -14,13 +14,16 @@
     <h2 class='text-center'>Пазарна информация</h2>
     <div class="container">
         <form action="#" method="get" style="text-align: center; padding-bottom: 40px">
-
-                <h4>Може да разгледате всичките ни публикации или да потърсите такава по желани от Вас критерии.</h4>
-                {{ form.as_p }}
-                <button type="submit" class="btn btn-lg btn-secondary">Филтрирай</button>
-                <a href="{% url 'all market info' %}" class="btn btn-primary">Изчисти филтъра</a>
-
+            <h4>Може да разгледате всичките ни публикации или да потърсите такава по ключова дума.</h4>
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-lg btn-secondary">Филтрирай</button>
+            <a href="{% url 'all market info' %}" class="btn btn-primary">Изчисти филтъра</a>
         </form>
+        {% if request.user.is_superuser %}
+            <div style="padding-bottom: 10px">
+                <a href="{% url 'create market info' %}" class="btn btn-primary">Качи нова статия</a>
+            </div>
+        {% endif %}
     </div>
     {% for info in infos %}
         <div class="container">

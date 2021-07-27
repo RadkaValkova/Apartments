@@ -11,7 +11,7 @@ class BootstrapFormMixin:
             }
 
 
-class MarketInfoForm(forms.ModelForm):
+class MarketInfoForm(BootstrapFormMixin, forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._init_bootstrap()
@@ -22,7 +22,9 @@ class MarketInfoForm(forms.ModelForm):
 
 
 class CreateMarketInfoForm(MarketInfoForm):
-    pass
+    published_date = forms.DateField(
+        widget=forms.DateInput(format=('%m/%d/%Y'), attrs={'type': 'date'})
+    )
 
 
 # class EditMarketInfoForm(MarketInfoForm):
@@ -31,6 +33,7 @@ class CreateMarketInfoForm(MarketInfoForm):
 #
 # class DeleteMarketInfoForm(MarketInfoForm):
 #     pass
+
 
 class SearchMarketInfoForm(forms.Form):
     id = forms.IntegerField(
@@ -41,6 +44,5 @@ class SearchMarketInfoForm(forms.Form):
         max_length=30,
         required=False,
         label='Ключова дума',
-        help_text='Моля, попълнете ключова дума, по която публикация.'
-
+        help_text='Моля, попълнете ключова дума, по която да потърсите публикация.',
     )

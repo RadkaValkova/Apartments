@@ -1,4 +1,4 @@
-import datetime
+from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render, redirect
 
@@ -6,21 +6,22 @@ from Apart.market_info_app.forms import CreateMarketInfoForm, SearchMarketInfoFo
 from Apart.market_info_app.models import MarketInfoModel
 
 
+@login_required
 def create_market_info(request):
     if request.method == 'GET':
         context = {
             'form': CreateMarketInfoForm()
         }
-        return render(request, '', context)
+        return render(request, 'create_market_info.html', context)
     else:
         form = CreateMarketInfoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home page')
+            return redirect('all market info')
         context = {
             'form': form
         }
-        return render(request, '', context)
+        return render(request, 'create_market_info.html', context)
 
 
 def get_filter_values(values):
@@ -43,10 +44,6 @@ def all_market_info(request):
 
     context = {
         'infos': infos,
-        'form':form,
+        'form': form,
     }
     return render(request, 'all_market_info.html', context)
-
-
-
-

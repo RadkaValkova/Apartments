@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'Apart.inquiry',
     'Apart.market_info_app',
     'Apart.accounts',
+    'Apart.core',
 ]
 
 MIDDLEWARE = [

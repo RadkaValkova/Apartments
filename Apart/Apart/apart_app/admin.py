@@ -7,7 +7,7 @@ from Apart.apart_app.models import TownModel, TypeModel, ApartmentModel, DealMod
 class ApartAdmin(admin.ModelAdmin):
     list_display = ['type', 'town', 'construction', 'construction_year', 'deal', 'status', 'user']
     list_filter = ['type', 'town', 'date']
-    search_fields = ['type', 'town', 'deal', 'status']
+    search_fields = ['type__name', 'town', 'deal__name', 'status__name']
     fieldsets = (
         ('Functional information', {
             'fields': (

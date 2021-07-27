@@ -4,9 +4,7 @@ from os.path import join
 from django import forms
 from django.conf import settings
 
-from Apart.apart_app.apart_choices import TYPE_CHOICES
-from Apart.apart_app.models import ApartmentModel, TownModel, TypeModel, ConstructionModel, DealModel
-from Apart.apart_app.validators import positive_value_validator
+from Apart.apart_app.models import ApartmentModel, TypeModel, ConstructionModel, DealModel
 
 
 class BootstrapFormMixin:
@@ -26,20 +24,38 @@ class ApartmentForm(forms.ModelForm, BootstrapFormMixin):
         model = ApartmentModel
         exclude = ('user',)
 
-        town = forms.CharField(
-            widget=forms.TextInput(
-                attrs={'placeholder': 'въведете град'}
-            ),
-            help_text='моля въведете град',
-            validators=[]
-        )
-
-    def clean_town(self):
-        return self.cleaned_data['town'].capitalize()
+    #     town = forms.CharField(
+    #         widget=forms.TextInput(
+    #             attrs={'placeholder': 'въведете град'}
+    #         ),
+    #         help_text='моля въведете град',
+    #         validators=[]
+    #     )
+    #
+    #     construction_year = forms.CharField(
+    #         max_length=4,
+    #         widget=forms.TextInput(
+    #             attrs={'placeholder': 'въведете град'}
+    #         ),
+    #         help_text='моля въведете година',
+    #         error_messages= 'въведете 4-цифрена стойност'
+    #     )
+    #
+    # def clean_town(self):
+    #     return self.cleaned_data['town'].capitalize()
 
 
 class CreateApartmentForm(ApartmentForm):
-    pass
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._init_bootstrap()
+
+    class Meta:
+        model = ApartmentModel
+        exclude = ('user',)
+
+    def clean_town(self):
+        return self.cleaned_data['town'].capitalize()
 
 
 class EditApartmentForm(ApartmentForm):

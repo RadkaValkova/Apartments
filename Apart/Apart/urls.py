@@ -25,5 +25,6 @@ urlpatterns = [
     path('', include('Apart.apart_app.urls')),
     path('inquiry/', include('Apart.inquiry.urls')),
     path('marketinfo/', include('Apart.market_info_app.urls')),
-    path('accounts/', include('Apart.accounts.urls'))
+    path('accounts/', include('Apart.accounts.urls')),
+    path('', include('Apart.core.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
