@@ -72,7 +72,6 @@ class ApartmentModel(models.Model):
     )
     construction_year = models.CharField(
         max_length=4,
-        blank=True,
     )
     deal = models.ForeignKey(
         DealModel,
@@ -118,7 +117,7 @@ class ApartmentModel(models.Model):
 
     email = models.EmailField()
 
-    contact_phone = models.IntegerField()
+    contact_phone = models.CharField(max_length=20)
 
     user = models.ForeignKey(
         UserModel,

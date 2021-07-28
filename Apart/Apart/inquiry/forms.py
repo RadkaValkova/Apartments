@@ -1,9 +1,8 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from Apart.core.validators import max_length_validator
+from Apart.core.validators import max_length_validator, first_upper_letter_validator, is_all_digits_validator
 from Apart.inquiry.models import Inquiry, CategoryModel
-from django.utils.translation import ugettext_lazy as _
 
 
 class BootstrapFormMixin:
@@ -23,23 +22,39 @@ class InquiryForm(forms.ModelForm, BootstrapFormMixin):
         model = Inquiry
         fields = '__all__'
 
-    def clean_first_name(self):
-        data = self.cleaned_data['first_name']
-        if data[0].islower():
-            raise ValidationError('Изпишете името с главна буква')
-        return data
+    first_name = forms.CharField(
+        max_length=15,
+        validators=[first_upper_letter_validator],
+        error_messages={'max_length': 'Полето трябва да съдържа до 15 символа.'}
+    )
 
-    def clean_last_name(self):
-        data = self.cleaned_data['last_name']
-        if data[0].islower():
-            raise ValidationError('Изпишете фамилията с главна буква')
-        return data
+    last_name = forms.CharField(
+        max_length=15,
+        validators=[first_upper_letter_validator],
+        error_messages={'max_length': 'Полето трябва да съдържа до 15 символа.'}
+    )
 
-    def clean_town(self):
-        data = self.cleaned_data['town']
-        if data[0].islower():
-            raise ValidationError('Изпишете градът с главна буква')
-        return data
+    town = forms.CharField(
+        max_length=15,
+        validators=[first_upper_letter_validator],
+        error_messages={'max_length': 'Полето трябва да съдържа до 15 символа.'}
+    )
+
+    phone = forms.CharField(
+        max_length=20,
+        validators=[is_all_digits_validator],
+        error_messages={'max_length': 'Полето трябва да съдържа до 20 символа'}
+    )
+
+    email = forms.EmailField(
+        widget=forms.EmailInput()
+    )
+
+    text = forms.CharField(
+        widget=forms.Textarea(),
+        max_length=1000,
+        error_messages={'max_length': 'Полето трябва да съдържа до 1000 символа'}
+    )
 
 
 class FilterInquiryForm(BootstrapFormMixin, forms.Form):

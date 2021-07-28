@@ -1,5 +1,6 @@
 from django import forms
 
+from Apart.core.validators import first_upper_letter_validator
 from Apart.market_info_app.models import MarketInfoModel
 
 
@@ -22,8 +23,28 @@ class MarketInfoForm(BootstrapFormMixin, forms.ModelForm):
 
 
 class CreateMarketInfoForm(MarketInfoForm):
+    title = forms.CharField(
+        max_length=15,
+        validators=[first_upper_letter_validator],
+        error_messages={'max_length': 'Полето трябва да съдържа до 15 символа.'}
+    )
+
+    source = forms.CharField(
+        max_length=50,
+        error_messages={'max_length': 'Полето трябва да съдържа до 15 символа.'}
+    )
+
+    text = forms.CharField(
+        widget=forms.Textarea(),
+        max_length=1000,
+        error_messages={'max_length': 'Полето трябва да съдържа до 1000 символа'}
+    )
+
     published_date = forms.DateField(
-        widget=forms.DateInput(format=('%m/%d/%Y'), attrs={'type': 'date'})
+        widget=forms.DateInput(
+            format=('%m/%d/%Y'),
+            attrs={'type': 'date'}
+        )
     )
 
 

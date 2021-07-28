@@ -18,7 +18,9 @@
             {{ form.as_p }}
             <button type="submit" class="btn btn-lg btn-secondary">Филтрирай</button>
             <a href="{% url 'all aparts' %}" class="btn btn-primary">Изчисти филтъра</a>
-
+            <div style="padding-top: 30px">
+                <p>Резултати от търсене на {{ request }}</p>
+            </div>
         </form>
     </div>
     <div class="container">
@@ -46,10 +48,12 @@
         <nav aria-label="Page navigation conatiner" style="padding-top: 20px">
             <ul class="pagination justify-content-center">
                 {% if aparts.has_previous %}
-                    <li><a href="?page={{ aparts.previous_page_number }}" class="page-link">&laquo; Предишна страница </a></li>
+                    <li><a href="?page={{ aparts.previous_page_number }}" class="page-link">&laquo; Предишна
+                        страница </a></li>
                 {% endif %}
                 {% if aparts.has_next %}
-                    <li><a href="?page={{ aparts.next_page_number }}" class="page-link"> Следваща страница &raquo;</a></li>
+                    <li><a href="?page={{ aparts.next_page_number }}" class="page-link"> Следваща страница &raquo;</a>
+                    </li>
                 {% endif %}
             </ul>
         </nav>

@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="text-lg-start" style="margin-left: 200px">
+    <div class="text-lg-center">
         <h1>Здравейте, {{ profile.first_name }}!</h1>
         <h5>Това е Вашият профил</h5>
         {% if profile.profile_image %}
@@ -19,12 +19,10 @@
         {% else %}
             <img class=" mb-3" src="{% static 'images/profile_anonimous.webp' %}" alt="" width="140" height="140">
         {% endif %}
-
         <div>
             <a href="{% url 'edit profile' %}" class="btn btn-primary">Завърши профила си</a>
-            <a href="{% url 'delete user' %}" class="btn btn-danger">Изтрий</a>
+            <a href="{% url 'delete user' %}" class="btn btn-danger">Изтрий профила си</a>
         </div>
-
     </div>
     <hr>
     {% if aparts %}

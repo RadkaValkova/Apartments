@@ -12,24 +12,23 @@
 {% endblock %}
 
 {% block content %}
-
     <h3 class="display-6 text-center">Моля, направете желаните корекции и ги потвърдете!</h3>
-
     <form method="post" class="m-auto w-25" action="{% url 'edit profile' %}" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.errors }}
+        {{ form.as_p }}
 
-        <label for="id_first_name">Име</label>
-        {{ form.first_name }}
-
-        <label for="id_last_name">Фамилия</label>
-        {{ form.last_name }}
-
-        <label for="id_phone_number">Телефон за контакт</label>
-        {{ form.phone_number }}
-
-        <label for="id_profile_image">Профилна снимка</label>
-        {{ form.profile_image }}
+{#        <label for="id_first_name">Име</label>#}
+{#        {{ form.first_name }}#}
+{##}
+{#        <label for="id_last_name">Фамилия</label>#}
+{#        {{ form.last_name }}#}
+{##}
+{#        <label for="id_phone_number">Телефон за контакт</label>#}
+{#        {{ form.phone_number }}#}
+{##}
+{#        <label for="id_profile_image">Профилна снимка</label>#}
+{#        {{ form.profile_image }}#}
 
         <button class="btn btn-success">Обнови</button>
         <a class="btn btn-primary" href="{% url 'profile details' %}">Откажи</a>

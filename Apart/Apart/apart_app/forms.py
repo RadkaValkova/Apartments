@@ -5,6 +5,7 @@ from django import forms
 from django.conf import settings
 
 from Apart.apart_app.models import ApartmentModel, TypeModel, ConstructionModel, DealModel
+from Apart.core.validators import first_upper_letter_validator, positive_value_validator, is_all_digits_validator
 
 
 class BootstrapFormMixin:
@@ -24,26 +25,6 @@ class ApartmentForm(forms.ModelForm, BootstrapFormMixin):
         model = ApartmentModel
         exclude = ('user',)
 
-    #     town = forms.CharField(
-    #         widget=forms.TextInput(
-    #             attrs={'placeholder': 'въведете град'}
-    #         ),
-    #         help_text='моля въведете град',
-    #         validators=[]
-    #     )
-    #
-    #     construction_year = forms.CharField(
-    #         max_length=4,
-    #         widget=forms.TextInput(
-    #             attrs={'placeholder': 'въведете град'}
-    #         ),
-    #         help_text='моля въведете година',
-    #         error_messages= 'въведете 4-цифрена стойност'
-    #     )
-    #
-    # def clean_town(self):
-    #     return self.cleaned_data['town'].capitalize()
-
 
 class CreateApartmentForm(ApartmentForm):
     def __init__(self, *args, **kwargs):
@@ -54,8 +35,46 @@ class CreateApartmentForm(ApartmentForm):
         model = ApartmentModel
         exclude = ('user',)
 
-    def clean_town(self):
-        return self.cleaned_data['town'].capitalize()
+    town = forms.CharField(
+        max_length=30,
+        validators=[first_upper_letter_validator],
+        error_messages={'max_length': 'Полето трябва да съдържа до 30 символа.'}
+    )
+
+    construction_year = forms.CharField(
+        max_length=4,
+        validators=[is_all_digits_validator],
+        error_messages={'max_length': 'Полето трябва да съдържа четири цифри.'}
+    )
+
+    price_offer = forms.IntegerField(
+        validators=[positive_value_validator]
+    )
+
+    price_realized = forms.IntegerField(
+        required=False,
+        validators=[positive_value_validator]
+    )
+
+    pure_area = forms.IntegerField(
+        validators=[positive_value_validator]
+    )
+
+    total_area = forms.IntegerField(
+        validators=[positive_value_validator]
+    )
+
+    description = forms.CharField(
+        widget=forms.Textarea(),
+        max_length=1000,
+        error_messages={'max_length': 'Полето трябва да съдържа до 1000 символа'}
+    )
+
+    contact_phone = forms.CharField(
+        max_length=20,
+        validators=[is_all_digits_validator],
+        error_messages={'max_length': 'Полето трябва да съдържа до 20 символа'}
+    )
 
 
 class EditApartmentForm(ApartmentForm):
@@ -71,9 +90,53 @@ class EditApartmentForm(ApartmentForm):
         exclude = ('user',)
         fields = '__all__'
 
+    town = forms.CharField(
+        max_length=30,
+        validators=[first_upper_letter_validator],
+        error_messages={'max_length': 'Полето трябва да съдържа до 30 символа.'}
+    )
+
+    construction_year = forms.CharField(
+        max_length=4,
+        validators=[is_all_digits_validator],
+        error_messages={'max_length': 'Полето трябва да съдържа четири цифри.'}
+    )
+
+    price_offer = forms.IntegerField(
+        validators=[positive_value_validator]
+    )
+
+    price_realized = forms.IntegerField(
+        required=False,
+        validators=[positive_value_validator]
+    )
+
+    pure_area = forms.IntegerField(
+        validators=[positive_value_validator]
+    )
+
+    total_area = forms.IntegerField(
+        validators=[positive_value_validator]
+    )
+
+    description = forms.CharField(
+        widget=forms.Textarea(),
+        max_length=1000,
+        error_messages={'max_length': 'Полето трябва да съдържа до 1000 символа'}
+    )
+
+    email = forms.EmailField(
+        widget=forms.EmailInput()
+    )
+
+    contact_phone = forms.CharField(
+        max_length=20,
+        validators=[is_all_digits_validator],
+        error_messages={'max_length': 'Полето трябва да съдържа до 20 символа'}
+    )
+
 
 class FilterApartsForm(BootstrapFormMixin, forms.Form):
-
     id = forms.IntegerField(
         required=False,
         widget=forms.HiddenInput()
@@ -102,4 +165,3 @@ class FilterApartsForm(BootstrapFormMixin, forms.Form):
         label='Вид сделка',
         help_text='Моля, изберете от падащото меню видът на сделката.'
     )
-

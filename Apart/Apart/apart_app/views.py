@@ -26,7 +26,7 @@ def get_filter_values(values):
 
 
 def all_aparts(request):
-    aparts_list = ApartmentModel.objects.filter(status__name='активна обява')
+    aparts_list = ApartmentModel.objects.filter(status__name='активна обява').order_by('id').reverse()
     form = FilterApartsForm()
 
     values = get_filter_values(request.GET)
@@ -45,7 +45,7 @@ def all_aparts(request):
         aparts_list = aparts_list.filter(deal=deal)
 
     if form.is_valid():
-        form.save()
+        form.save(commit=False)
 
     context = {
         'aparts': pagination(request, aparts_list, 12),

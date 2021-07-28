@@ -59,10 +59,11 @@ def profile_details(request):
         form = ProfileForm(instance=profile)
 
     user_aparts = ApartmentModel.objects.filter(user_id=request.user.id)
+    user_aparts = user_aparts.order_by('id').reverse()
 
     context = {
         'form': form,
-        'aparts': pagination(request,user_aparts,8),
+        'aparts': pagination(request,user_aparts,4),
         'profile': profile,
     }
     return render(request, 'accounts/profile_details.html', context)
