@@ -63,7 +63,7 @@ def profile_details(request):
 
     context = {
         'form': form,
-        'aparts': pagination(request,user_aparts,4),
+        'aparts': pagination(request,user_aparts),
         'profile': profile,
     }
     return render(request, 'accounts/profile_details.html', context)
@@ -82,18 +82,37 @@ def delete_user(request):
 def edit_profile(request):
     user_id = request.user.id
     profile = Profile.objects.get(pk=user_id)
-    if request.POST:
-        form = ProfileForm(request.POST,request.FILES,instance=profile)
+    if request.method == 'GET':
+        form = ProfileForm(instance=profile)
+        context = {
+            'form': form,
+            'profile': profile,
+        }
+        return render(request, 'accounts/edit_profile.html', context)
+    else:
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
             return redirect('profile details')
-    else:
-        form = ProfileForm(
-            instance=profile,
-        )
 
-    context = {
-        'form': form,
-        'profile':profile,
-    }
-    return render(request, 'accounts/edit_profile.html', context)
+        context = {
+            'form': form,
+            'profile': profile,
+        }
+        return render(request, 'accounts/edit_profile.html', context)
+
+    # if request.POST:
+    #     form = ProfileForm(request.POST,request.FILES,instance=profile)
+    #     if form.is_valid():
+    #         form.save()
+    #         return redirect('profile details')
+    # else:
+    #     form = ProfileForm(
+    #         instance=profile,
+    #     )
+    #
+    # context = {
+    #     'form': form,
+    #     'profile':profile,
+    # }
+    # return render(request, 'accounts/edit_profile.html', context)

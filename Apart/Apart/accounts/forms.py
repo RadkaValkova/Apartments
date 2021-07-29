@@ -1,4 +1,8 @@
+import os
+from os.path import join
+
 from django import forms
+from django.conf import settings
 from django.contrib.auth import authenticate, get_user_model
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
@@ -78,11 +82,20 @@ class RegisterForm(UserCreationForm):
 
 class ProfileForm(BootstrapFormMixin, forms.ModelForm):
     # def save(self, commit=True):
-    #     db_apart = Profile.objects.get(pk=self.instance.id)
+    #     db_profile = Profile.objects.get(pk=self.instance.pk)
     #     if commit:
-    #         image_path = join(settings.MEDIA_ROOT, str(db_apart.image))
+    #         image_path = join(settings.MEDIA_ROOT, str(db_profile.profile_image))
     #         os.remove(image_path)
     #     return super().save(commit)
+
+    def save(self, commit=True):
+        db_profile = Profile.objects.get(pk=self.instance.pk)
+        new_image = self.files.get('profile_image')
+        old_image = str(db_profile.profile_image)
+        old_image_path = os.path.join(settings.MEDIA_ROOT,old_image)
+        if commit and new_image and old_image and old_image == 'profile_anonimous.webp':
+            os.remove(old_image_path)
+        return super().save(commit=commit)
 
     first_name = forms.CharField(
         label='Име',
@@ -111,6 +124,11 @@ class ProfileForm(BootstrapFormMixin, forms.ModelForm):
             }
         )
     )
+
+    # profile_image = forms.ImageField(
+    #     label='Профилна снимка',
+    #     widget=forms.FileInput,
+    # )
 
     class Meta:
         model = Profile

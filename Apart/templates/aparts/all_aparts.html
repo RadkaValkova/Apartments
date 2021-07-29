@@ -5,26 +5,22 @@
 {% block styles %}
     <style>
         body {
-            background-image: url('/static/images/double-bubble-outline.png')
+            background-image: url('/static/images/home_page_picture_changed3.jpg')
         }
     </style>
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container" >
         <form action="#" method="get" style="text-align: center; padding-bottom: 40px">
-
             <h4>Може да разгледате всичките ни обяви или да потърсите имот по желани от Вас критерии.</h4>
             {{ form.as_p }}
-            <button type="submit" class="btn btn-lg btn-secondary">Филтрирай</button>
+            <button type="submit" class="btn btn btn-secondary">Филтрирай</button>
             <a href="{% url 'all aparts' %}" class="btn btn-primary">Изчисти филтъра</a>
-            <div style="padding-top: 30px">
-                <p>Резултати от търсене на {{ request }}</p>
-            </div>
         </form>
     </div>
     <div class="container">
-        <div class="row row-cols-1 row-cols-md-4 g-4">
+        <div class="row row-cols-1 row-cols-md-5 g-4">
             {% for apart in aparts %}
                 <div class="col">
                     <div class="card h-100">

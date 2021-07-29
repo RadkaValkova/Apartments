@@ -1,11 +1,13 @@
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import DeleteView, DetailView
 
 from Apart.apart_app.forms import CreateApartmentForm, EditApartmentForm, FilterApartsForm
 from Apart.apart_app.models import ApartmentModel
 
 from Apart.core.views import pagination
-
 
 def home_page(request):
     return render(request, 'home_page.html')
@@ -27,7 +29,6 @@ def get_filter_values(values):
 
 def all_aparts(request):
     aparts_list = ApartmentModel.objects.filter(status__name='активна обява').order_by('id').reverse()
-    form = FilterApartsForm()
 
     values = get_filter_values(request.GET)
     town = values['town']
@@ -44,12 +45,9 @@ def all_aparts(request):
     if deal:
         aparts_list = aparts_list.filter(deal=deal)
 
-    if form.is_valid():
-        form.save(commit=False)
-
     context = {
-        'aparts': pagination(request, aparts_list, 12),
-        'form': form,
+        'aparts': pagination(request,aparts_list),
+        'form': FilterApartsForm(initial=values),
     }
 
     return render(request, 'aparts/all_aparts.html', context)
@@ -110,10 +108,24 @@ def edit_apart(request, pk):
         return render(request, 'aparts/edit.html', context)
 
 
+# @login_required
+# def delete_apart(request, pk):
+#     apart = ApartmentModel.objects.get(pk=pk)
+#     if request.method == 'POST':
+#         apart.delete()
+#         return redirect('profile details')
+#
+#     context = {
+#         'apart': apart,
+#     }
+#     return render(request, 'aparts/delete.html', context)
+
 @login_required
 def delete_apart(request, pk):
     apart = ApartmentModel.objects.get(pk=pk)
     if request.method == 'POST':
+        image = apart.image
+        image.delete()
         apart.delete()
         return redirect('profile details')
 
@@ -121,3 +133,9 @@ def delete_apart(request, pk):
         'apart': apart,
     }
     return render(request, 'aparts/delete.html', context)
+
+# class ApartDeleteView(LoginRequiredMixin, DeleteView):
+#     template_name = 'aparts/delete.html'
+#     model = ApartmentModel
+#     success_url = reverse_lazy('profile details')
+

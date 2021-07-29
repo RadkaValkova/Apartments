@@ -1,6 +1,6 @@
 {% extends 'shared/base_tamplete.html' %}
 
-{% block head_title %}Изтриване на {{ apart.pk }}{% endblock %}
+{#{% block head_title %}Изтриване на {{ apart.pk }}{% endblock %}#}
 
 {% block styles %}
     <style>
@@ -15,7 +15,7 @@
         <h1>Сигурни ли сте, че искате да изтриете обява с код номер - {{ apart.pk }}?</h1>
         <h5> /{{ apart.type }}, {{ apart.town }}, РЗП: {{ apart.total_area }}, {{ apart.description }}/</h5>
         <div class="m-auto d-flex justify-content-center">
-            <form action="{% url 'delete' apart.id %}" method="post">
+            <form action="{% url 'delete' apart.id %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <br>
                 <div class="buttons">
@@ -26,3 +26,20 @@
         </div>
     </div>
 {% endblock %}
+
+{#{% block content %}#}
+{#    <div class="container" style="margin-bottom: 10px; text-align: center; padding-top:50px;padding-bottom: 50px;">#}
+{#        <h1>Сигурни ли сте, че искате да изтриете обява с код номер - {{ object}}?</h1>#}
+{#        <h5> /{{ object.type }}, {{ object.town }}, РЗП: {{ object.total_area }}, {{ object.description }}/</h5>#}
+{#        <div class="m-auto d-flex justify-content-center">#}
+{#            <form action="{% url 'delete' %}" method="post" enctype="multipart/form-data">#}
+{#                {% csrf_token %}#}
+{#                <br>#}
+{#                <div class="buttons">#}
+{#                    <button type="submit" class="btn btn-danger">Потвърди</button>#}
+{#                    <a class="btn btn-primary" href="{% url 'apart details' apart.id %}">Откажи</a>#}
+{#                </div>#}
+{#            </form>#}
+{#        </div>#}
+{#    </div>#}
+{#{% endblock %}#}

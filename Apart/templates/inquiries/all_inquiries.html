@@ -14,7 +14,7 @@
     <form action="#" method="get" style="text-align: center; padding-bottom: 40px">
         <h4>Филтър по зададени критерии</h4>
         {{ form.as_p }}
-        <button type="submit" class="btn btn-lg btn-secondary">Филтрирай</button>
+        <button type="submit" class="btn btn btn-secondary">Филтрирай</button>
         <a href="{% url 'all inquiries' %}" class="btn btn-primary">Изчисти филтъра</a>
     </form>
     <h2 class='text-center'>Получени запитвания</h2>
@@ -23,8 +23,7 @@
             <div class="accordion" id="accordionExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne"
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
                                 aria-expanded="true" aria-controls="collapseOne">
                                 № {{ inquiry.id }}, <b>Категория:</b> {{ inquiry.category }}
                         </button>
