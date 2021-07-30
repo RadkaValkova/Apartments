@@ -58,8 +58,7 @@ def profile_details(request):
     else:
         form = ProfileForm(instance=profile)
 
-    user_aparts = ApartmentModel.objects.filter(user_id=request.user.id)
-    user_aparts = user_aparts.order_by('id').reverse()
+    user_aparts = ApartmentModel.objects.filter(user_id=request.user.id).order_by('id').reverse()
 
     context = {
         'form': form,
@@ -72,7 +71,9 @@ def profile_details(request):
 @login_required
 def delete_user(request):
     user = request.user
+    image = Profile.objects.get(pk=request.user.id).profile_image
     if request.POST:
+        image.delete()
         user.delete()
         return redirect('home page')
     return render(request, 'accounts/delete_user.html')

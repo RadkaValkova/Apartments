@@ -5,25 +5,11 @@ from django.shortcuts import render, redirect
 from Apart.apart_app.forms import CreateApartmentForm, EditApartmentForm, FilterApartsForm
 from Apart.apart_app.models import ApartmentModel
 
-from Apart.core.views import pagination
+from Apart.core.views import pagination, get_filter_values
 
 
 def home_page(request):
     return render(request, 'home_page.html')
-
-
-def get_filter_values(values):
-    town = values['town'] if 'town' in values else ''
-    type = values['type'] if 'type' in values else ''
-    construction = values['construction'] if 'construction' in values else ''
-    deal = values['deal'] if 'deal' in values else ''
-
-    return {
-        'town': town,
-        'type': type,
-        'construction': construction,
-        'deal': deal,
-    }
 
 
 def all_aparts(request):

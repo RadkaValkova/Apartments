@@ -81,19 +81,12 @@ class RegisterForm(UserCreationForm):
 
 
 class ProfileForm(BootstrapFormMixin, forms.ModelForm):
-    # def save(self, commit=True):
-    #     db_profile = Profile.objects.get(pk=self.instance.pk)
-    #     if commit:
-    #         image_path = join(settings.MEDIA_ROOT, str(db_profile.profile_image))
-    #         os.remove(image_path)
-    #     return super().save(commit)
-
     def save(self, commit=True):
         db_profile = Profile.objects.get(pk=self.instance.pk)
         new_image = self.files.get('profile_image')
         old_image = str(db_profile.profile_image)
         old_image_path = os.path.join(settings.MEDIA_ROOT,old_image)
-        if commit and new_image and old_image and old_image == 'profile_anonimous.webp':
+        if commit and new_image and old_image:
             os.remove(old_image_path)
         return super().save(commit=commit)
 
