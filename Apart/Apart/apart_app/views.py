@@ -1,13 +1,17 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core import paginator
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import DeleteView, DetailView
+from django.views.generic import DeleteView, DetailView, ListView
+from django.views.generic.list import MultipleObjectMixin
 
 from Apart.apart_app.forms import CreateApartmentForm, EditApartmentForm, FilterApartsForm
 from Apart.apart_app.models import ApartmentModel
 
 from Apart.core.views import pagination
+
 
 def home_page(request):
     return render(request, 'home_page.html')
@@ -45,12 +49,75 @@ def all_aparts(request):
     if deal:
         aparts_list = aparts_list.filter(deal=deal)
 
+    # context = {
+    #     'aparts': aparts_list,
+    #     'form': FilterApartsForm(initial=values),
+    # }
     context = {
         'aparts': pagination(request,aparts_list),
         'form': FilterApartsForm(initial=values),
     }
 
     return render(request, 'aparts/all_aparts.html', context)
+
+
+# class ApartList(ListView):
+#     model = ApartmentModel
+#     template_name = 'aparts/all_aparts.html'
+#     # context_object_name = 'aparts'
+#     # form_class = FilterApartsForm
+#     paginate_by = 10
+#
+#     # def get_queryset(self):
+#     #     aparts = super().get_queryset()
+#     #
+#     #     town = self.request.GET.get('town', '')
+#     #     type = self.request.GET.get('type', '')
+#     #     construction = self.request.GET.get('construction', '')
+#     #     deal = self.request.GET.get('deal', '')
+#     #     if town:
+#     #         return aparts.filter(town__icontains=town)
+#     #     if type:
+#     #         return aparts.filter(type=type)
+#     #     if construction:
+#     #         return aparts.filter(construction=construction)
+#     #     if deal:
+#     #         return aparts.filter(deal=deal)
+#     #
+#     #     # self.filterset = self.filterset_class(self.request.GET, queryset=aparts)
+#     #     # return self.filterset.qs.distinct()
+#
+#     def get_queryset(self):
+#         # aparts = super(ApartList, self).get_queryset()
+#         aparts = super().get_queryset()
+#         # aparts = self.model.objects.all()
+#         town = self.request.GET.get('town', '')
+#         type = self.request.GET.get('type', '')
+#         construction = self.request.GET.get('construction', '')
+#         deal = self.request.GET.get('deal', '')
+#         if town:
+#             return aparts.filter(town__icontains=town)
+#         if type:
+#             return aparts.filter(type=type)
+#         if construction:
+#             return aparts.filter(construction=construction)
+#         if deal:
+#             return aparts.filter(deal=deal)
+#         return aparts
+#
+#     # def get_context_data(self, **kwargs):
+#     #     context = super().get_context_data(**kwargs)
+#     #     # Pass the filterset to the template - it provides the form.
+#     #     context['aparts'] = self.get_queryset()
+#     #     context['form'] = FilterApartsForm()
+#     #     return context
+#
+#     def get_context_data(self, **kwargs):
+#         # context = super(ApartList, self).get_context_data(**kwargs)
+#         context = super().get_context_data(**kwargs)
+#         context['aparts'] = self.get_queryset()
+#         context['form'] = FilterApartsForm()
+#         return context
 
 
 def apart_details(request, pk):
@@ -138,4 +205,3 @@ def delete_apart(request, pk):
 #     template_name = 'aparts/delete.html'
 #     model = ApartmentModel
 #     success_url = reverse_lazy('profile details')
-

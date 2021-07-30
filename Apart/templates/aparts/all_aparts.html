@@ -1,5 +1,5 @@
 {% extends 'shared/base_tamplete.html' %}
-
+{% load my_tags %}
 {% block head_title %}Всички обяви{% endblock %}
 
 {% block styles %}
@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container" >
+    <div class="container">
         <form action="#" method="get" style="text-align: center; padding-bottom: 40px">
             <h4>Може да разгледате всичките ни обяви или да потърсите имот по желани от Вас критерии.</h4>
             {{ form.as_p }}
@@ -21,38 +21,67 @@
     </div>
     <div class="container">
         <div class="row row-cols-1 row-cols-md-5 g-4">
-            {% for apart in aparts %}
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="{{ apart.image.url }}" class="card-img-top" alt="....">
-                        <div class="card-body">
-                            <h6 class="card-title"> Тип: {{ apart.type }}</h6>
-                            <h6 class="card-title"> Град: {{ apart.town }}</h6>
-                            <h6 class="card-title"> Цена: {{ apart.price_offer }} EUR</h6>
-                            <h6 class="card-title"> РЗП: {{ apart.total_area }} m2</h6>
-                            <h6 class="card-title"> Конструкция: {{ apart.construction }}</h6>
-                            <h6 class="card-title"> Година на построяване: {{ apart.construction_year }} год.</h6>
-                            <a href="{% url 'apart details' apart.id %}" class="btn btn-lg btn-secondary">Детайли</a>
+            {% if aparts %}
+                {% for apart in aparts %}
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="{{ apart.image.url }}" class="card-img-top" alt="....">
+                            <div class="card-body">
+                                <h6 class="card-title"> Тип: {{ apart.type }}</h6>
+                                <h6 class="card-title"> Град: {{ apart.town }}</h6>
+                                <h6 class="card-title"> Цена: {{ apart.price_offer }} EUR</h6>
+                                <h6 class="card-title"> РЗП: {{ apart.total_area }} m2</h6>
+                                <h6 class="card-title"> Конструкция: {{ apart.construction }}</h6>
+                                <h6 class="card-title"> Година на построяване: {{ apart.construction_year }} год.</h6>
+                                <a href="{% url 'apart details' apart.id %}"
+                                   class="btn btn-lg btn-secondary">Детайли</a>
+                            </div>
                         </div>
                     </div>
+                {% endfor %}
+                {#                <div class="pagination">#}
+                {#                    <span class="step-links">#}
+                {#                        {% if page_obj.has_previous %}#}
+                {#                            <a href="?page=1">&laquo; first</a>#}
+                {#                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>#}
+                {#                        {% endif %}#}
+                {##}
+                {#                        <span class="current">#}
+                {#                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.#}
+                {#                        </span>#}
+                {##}
+                {#                        {% if page_obj.has_next %}#}
+                {#                            <a href="?page={{ page_obj.next_page_number }}">next</a>#}
+                {#                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>#}
+                {#                        {% endif %}#}
+                {#                    </span>#}
+                {#                </div>#}
+            {% else %}
+                <div class="col-12" style="text-align: center; font-size: 20px; font-style: italic; color: orangered">
+                    <p>Няма намерени резултати от Вашето търсене.</p>
                 </div>
-            {% endfor %}
+            {% endif %}
         </div>
     </div>
 
-    {% if aparts.has_other_pages %}
-        <nav aria-label="Page navigation conatiner" style="padding-top: 20px">
-            <ul class="pagination justify-content-center">
-                {% if aparts.has_previous %}
-                    <li><a href="?page={{ aparts.previous_page_number }}" class="page-link">&laquo; Предишна
-                        страница </a></li>
-                {% endif %}
-                {% if aparts.has_next %}
-                    <li><a href="?page={{ aparts.next_page_number }}" class="page-link"> Следваща страница &raquo;</a>
-                    </li>
-                {% endif %}
-            </ul>
-        </nav>
+{#{% if is_paginated %}#}
+  {% if aparts.has_previous %}
+    <a href="?{% param_replace page=1 %}">First</a>
+    {% if aparts.previous_page_number != 1 %}
+      <a href="?{% param_replace page=aparts.previous_page_number %}">Previous</a>
     {% endif %}
+  {% endif %}
+
+  Page {{ aparts.number }} of {{ paginator.num_pages }}
+
+  {% if aparts.has_next %}
+    {% if aparts.next_page_number != paginator.num_pages %}
+      <a href="?{% param_replace page=aparts.next_page_number %}">Next</a>
+    {% endif %}
+    <a href="?{% param_replace page=paginator.num_pages %}">Last</a>
+  {% endif %}
+
+  <p>Objects {{ aparts.start_index }}—{{ aparts.end_index }}</p>
+{#{% endif %}#}
 
 {% endblock %}
