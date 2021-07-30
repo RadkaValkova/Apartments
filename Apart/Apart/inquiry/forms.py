@@ -1,7 +1,6 @@
 from django import forms
-from django.core.exceptions import ValidationError
 
-from Apart.core.validators import max_length_validator, first_upper_letter_validator, is_all_digits_validator
+from Apart.core.validators import first_upper_letter_validator, is_all_digits_validator
 from Apart.inquiry.models import Inquiry, CategoryModel
 
 
