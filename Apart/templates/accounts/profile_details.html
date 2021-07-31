@@ -7,20 +7,27 @@
             background-image: url('/static/images/double-bubble-outline.png')
         }
     </style>
+
 {% endblock %}
 
 {% block content %}
-    <div class="text-lg-center">
-        <h1>Здравейте, {{ profile.first_name }}!</h1>
-        <h5>Това е Вашият профил</h5>
-        {% if profile.profile_image %}
-            <img class="mb-3" src="{{ profile.profile_image.url }}" alt="" width="140" height="140">
-        {% else %}
-            <img class=" mb-3" src="{% static 'images/profile_anonimous.webp' %}" alt="" width="140" height="140">
-        {% endif %}
-        <div>
-            <a href="{% url 'edit profile' %}" class="btn btn-primary">Завърши / редактирай профила си</a>
-            <a href="{% url 'delete user' %}" class="btn btn-danger">Изтрий профила си</a>
+    <div class="container" style="background-color: whitesmoke; padding-top: 15px; padding-bottom: 15px;  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);">
+        <div class="text-lg-center">
+            <h2>Здравейте, {{ profile.first_name }}!</h2>
+
+            {% if profile.profile_image %}
+                <img class="mb-3" src="{{ profile.profile_image.url }}" alt="" width="170" height="150">
+            {% else %}
+                <img class="mb-3" src="{% static 'images/profile_anonimous.webp' %}" alt="" width="170" height="150">
+            {% endif %}
+            <h6>Това е Вашият профил. В него може да видите всички публикувани от вас обяви. <br>Тяхното съдържание може
+                да бъде редактирано
+                или изтривано само от Вас. <br>Ако желаете, може да допълните информацията за Вас, подадена при
+                регистрация.</h6>
+            <div>
+                <a href="{% url 'edit profile' %}" class="btn btn-primary">Завърши / редактирай профила си</a>
+                <a href="{% url 'delete user' %}" class="btn btn-danger">Изтрий профила си</a>
+            </div>
         </div>
     </div>
     <hr>
@@ -39,7 +46,8 @@
                                 <h6 class="card-title"> РЗП: {{ apart.total_area }} m2</h6>
                                 <h6 class="card-title"> Конструкция: {{ apart.construction }}</h6>
                                 <h6 class="card-title"> Година на построяване: {{ apart.construction_year }} год.</h6>
-                                <a href="{% url 'apart details' apart.id %}" class="btn btn-lg btn-secondary">Детайли</a>
+                                <a href="{% url 'apart details' apart.id %}"
+                                   class="btn btn-lg btn-secondary">Детайли</a>
                             </div>
                         </div>
                     </div>
@@ -47,17 +55,19 @@
             </div>
         </div>
         {% if aparts.has_other_pages %}
-        <nav aria-label="Page navigation conatiner" style="padding-top: 20px">
-            <ul class="pagination justify-content-center">
-                {% if aparts.has_previous %}
-                    <li><a href="?page={{ aparts.previous_page_number }}" class="page-link">&laquo; Предишна страница </a></li>
-                {% endif %}
-                {% if aparts.has_next %}
-                    <li><a href="?page={{ aparts.next_page_number }}" class="page-link"> Следваща страница &raquo;</a></li>
-                {% endif %}
-            </ul>
-        </nav>
-    {% endif %}
+            <nav aria-label="Page navigation conatiner" style="padding-top: 20px">
+                <ul class="pagination justify-content-center">
+                    {% if aparts.has_previous %}
+                        <li><a href="?page={{ aparts.previous_page_number }}" class="page-link">&laquo; Предишна
+                            страница </a></li>
+                    {% endif %}
+                    {% if aparts.has_next %}
+                        <li><a href="?page={{ aparts.next_page_number }}" class="page-link"> Следваща страница
+                            &raquo;</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        {% endif %}
     {% else %}
         <div class="text-center">
             <h2>Нямате публикувани обяви</h2>

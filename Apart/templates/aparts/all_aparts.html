@@ -5,7 +5,7 @@
 {% block styles %}
     <style>
         body {
-            background-image: url('/static/images/home_page_picture_changed3.jpg')
+            background-image: url('/static/images/home_page_picture_changed3.jpg');
         }
     </style>
 {% endblock %}
@@ -47,24 +47,26 @@
         </div>
     </div>
 
-{#{% if is_paginated %}#}
-  {% if aparts.has_previous %}
-    <a href="?{% param_replace page=1 %}">First</a>
-    {% if aparts.previous_page_number != 1 %}
-      <a href="?{% param_replace page=aparts.previous_page_number %}">Previous</a>
-    {% endif %}
-  {% endif %}
+    {#{% if is_paginated %}#}
+    <div class="" style="text-align: center; padding-top: 30px; font-size: 15px;">
+        {% if aparts.has_previous %}
+            <a href="?{% param_replace page=1 %}">Първа</a>
+            {% if aparts.previous_page_number != 1 %}
+                <a href="?{% param_replace page=aparts.previous_page_number %}">Предходна</a>
+            {% endif %}
+        {% endif %}
 
-  Page {{ aparts.number }} of {{ paginator.num_pages }}
+        Страница {{ aparts.number }} от {{ paginator.num_pages }}
 
-  {% if aparts.has_next %}
-    {% if aparts.next_page_number != paginator.num_pages %}
-      <a href="?{% param_replace page=aparts.next_page_number %}">Next</a>
-    {% endif %}
-    <a href="?{% param_replace page=paginator.num_pages %}">Last</a>
-  {% endif %}
+        {% if aparts.has_next %}
+            {% if aparts.next_page_number != paginator.num_pages %}
+                <a href="?{% param_replace page=aparts.next_page_number %}">Следваща</a>
+            {% endif %}
+            <a href="?{% param_replace page=paginator.num_pages %}">Последна</a>
+        {% endif %}
 
-  <p>Objects {{ aparts.start_index }}—{{ aparts.end_index }}</p>
-{#{% endif %}#}
+        <p>Брой обекти {{ aparts.start_index }}—{{ aparts.end_index }}</p>
+    </div>
+    {#{% endif %}#}
 
 {% endblock %}

@@ -1,6 +1,7 @@
 from django import forms
 
 from Apart.core.validators import first_upper_letter_validator, is_all_digits_validator
+from Apart.inquiry.inquiry_choices import CATEGORY_CHOICES
 from Apart.inquiry.models import Inquiry, CategoryModel
 
 
@@ -62,8 +63,9 @@ class FilterInquiryForm(BootstrapFormMixin, forms.Form):
         widget=forms.HiddenInput()
     )
 
-    category = forms.ModelChoiceField(
-        queryset=CategoryModel.objects.all(),
+    category = forms.ChoiceField(
+        choices=CATEGORY_CHOICES,
+        widget=forms.Select(),
         required=False,
         label='Категория',
         help_text='Филтър по категория на запитването',

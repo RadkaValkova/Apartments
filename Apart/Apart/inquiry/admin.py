@@ -6,7 +6,7 @@ from Apart.inquiry.models import Inquiry, CategoryModel
 class InquiryAdmin(admin.ModelAdmin):
     list_display = ['category', 'date', 'first_name', 'last_name', 'phone', 'email']
     list_filter = ['category', 'date']
-    search_fields = ['category__name', 'first_name', 'last_name']
+    search_fields = ['first_name', 'last_name']
     fieldsets = (
         ('Personal information', {
             'fields': (

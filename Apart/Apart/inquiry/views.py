@@ -31,9 +31,9 @@ def all_inquiries(request):
     last_name = values['last_name']
 
     if category:
-        inquiries = inquiries.filter(category=category)
+        inquiries = inquiries.filter(category__iexact=category)
     if first_name:
-        inquiries = inquiries.filter(first_name__iexact=first_name)
+        inquiries = inquiries.filter(first_name__icontains=first_name)
     if last_name:
         inquiries = inquiries.filter(last_name__iexact=last_name)
 
