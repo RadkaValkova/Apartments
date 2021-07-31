@@ -31,11 +31,11 @@ def all_inquiries(request):
     last_name = values['last_name']
 
     if category:
-        inquiries = inquiries.filter(category__iexact=category)
+        inquiries = inquiries.filter(category=category)
     if first_name:
         inquiries = inquiries.filter(first_name__icontains=first_name)
     if last_name:
-        inquiries = inquiries.filter(last_name__iexact=last_name)
+        inquiries = inquiries.filter(last_name__icontains=last_name)
 
     context = {
         'inquiries': inquiries,

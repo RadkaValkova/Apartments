@@ -22,6 +22,11 @@ class InquiryForm(forms.ModelForm, BootstrapFormMixin):
         model = Inquiry
         fields = '__all__'
 
+    category = forms.ChoiceField(
+        choices=CATEGORY_CHOICES[1:],
+        widget=forms.Select(),
+    )
+
     first_name = forms.CharField(
         max_length=15,
         validators=[first_upper_letter_validator],

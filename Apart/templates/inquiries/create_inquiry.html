@@ -13,7 +13,8 @@
 
 {% block content %}
     <h3 class="display-6 text-center">Моля, попълнете формата!</h3>
-    <div class="container" style="background-image: url('/static/images/home_page_picture_changed.jpg'); margin-bottom: 10px">
+    <div class="container"
+         style="background-image: url('/static/images/home_page_picture_changed.jpg'); margin-bottom: 10px">
         <form method="post" class="m-auto w-25">
             {% csrf_token %}
             {{ form.errors }}
@@ -38,9 +39,10 @@
 
             <label for="id_text">Вашето запитване</label>
             {{ form.text }}
-
-            <button type="submit" class="btn btn-lg btn-secondary">Изпрати</button>
-            <a class="btn btn-primary" href="{% url 'home page' %}">Откажи</a>
+            <div style="margin-top:10px; padding-bottom: 10px; text-align: center">
+                <button type="submit" class="btn btn-lg btn-success">Изпрати</button>
+                <a class="btn btn-primary" href="{% url 'home page' %}">Откажи</a>
+            </div>
         </form>
     </div>
 {% endblock %}

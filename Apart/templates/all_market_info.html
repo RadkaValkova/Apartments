@@ -16,7 +16,7 @@
         <form action="#" method="get" style="text-align: center; padding-bottom: 40px">
             <h4>Може да разгледате всичките ни публикации или да потърсите такава по ключова дума.</h4>
             {{ form.as_p }}
-            <button type="submit" class="btn btn-lg btn-secondary">Филтрирай</button>
+            <button type="submit" class="btn btn-lg btn-success">Филтрирай</button>
             <a href="{% url 'all market info' %}" class="btn btn-primary">Изчисти филтъра</a>
         </form>
         {% if request.user.is_superuser %}
