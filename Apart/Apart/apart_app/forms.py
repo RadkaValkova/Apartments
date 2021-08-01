@@ -78,12 +78,21 @@ class CreateApartmentForm(ApartmentForm):
 
 
 class EditApartmentForm(ApartmentForm):
+    # def save(self, commit=True):
+    #     db_apart = ApartmentModel.objects.get(pk=self.instance.id)
+    #     if commit:
+    #         image_path = join(settings.MEDIA_ROOT, str(db_apart.image))
+    #         os.remove(image_path)
+    #     return super().save(commit)
+
     def save(self, commit=True):
-        db_apart = ApartmentModel.objects.get(pk=self.instance.id)
-        if commit:
-            image_path = join(settings.MEDIA_ROOT, str(db_apart.image))
-            os.remove(image_path)
-        return super().save(commit)
+        db_apart = ApartmentModel.objects.get(pk=self.instance.pk)
+        new_image = self.files.get('image')
+        old_image = str(db_apart.image)
+        old_image_path = os.path.join(settings.MEDIA_ROOT,old_image)
+        if commit and new_image and old_image:
+            os.remove(old_image_path)
+        return super().save(commit=commit)
 
     class Meta:
         model = ApartmentModel

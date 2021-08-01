@@ -33,23 +33,34 @@
                     <li><b>Довършителни работи:</b> {{ apart.finishing_works }}</li>
                     <li><b>Вид сделка:</b> {{ apart.deal }}</li>
                     <li><b>Статус:</b> {{ apart.status }}</li>
+                    <li><b>Телефон за контакт:</b> {{ apart.contact_phone }}</li>
                 </ul>
-                <p><b>Описание:</b> <br>{{ apart.description }}</p>
-                <p><b>Телефон за контакт:</b><br>{{ apart.contact_phone }}</p>
-
-                {% if is_user %}
-                    <div>
-                        <a href="{% url 'edit' apart.id %}" class="btn btn-success">Редактирай</a>
-                        <a href="{% url 'delete' apart.id %}" class="btn btn-danger">Изтрий</a>
-                    </div>
-                {% else %}
-                    <p> Ако желаете допълнителна информация за конкретната обява, изпратете ни запитване</p>
-                    <a href="{% url 'create inquiry' %}" class="btn btn-success">Запитване</a>
-                {% endif %}
+                {#                <p><b>Описание:</b> <br>{{ apart.description }}</p>#}
+                {#                <p><b>Телефон за контакт:</b><br>{{ apart.contact_phone }}</p>#}
+                {##}
+                {#                {% if is_user %}#}
+                {#                    <div>#}
+                {#                        <a href="{% url 'edit' apart.id %}" class="btn btn-success">Редактирай</a>#}
+                {#                        <a href="{% url 'delete' apart.id %}" class="btn btn-danger">Изтрий</a>#}
+                {#                    </div>#}
+                {#                {% else %}#}
+                {#                    <p> Ако желаете допълнителна информация за конкретната обява, изпратете ни запитване</p>#}
+                {#                    <a href="{% url 'create inquiry' %}" class="btn btn-success">Запитване</a>#}
+                {#                {% endif %}#}
 
             </div>
         </div>
+        <p><b>Описание:</b> <br>{{ apart.description }}</p>
 
+        {% if is_user %}
+            <div>
+                <a href="{% url 'edit' apart.id %}" class="btn btn-success">Редактирай</a>
+                <a href="{% url 'delete' apart.id %}" class="btn btn-danger">Изтрий</a>
+            </div>
+        {% else %}
+            <p> Ако желаете допълнителна информация за конкретната обява, изпратете ни запитване</p>
+            <a href="{% url 'create inquiry' %}" class="btn btn-success">Запитване</a>
+        {% endif %}
     </div>
 
 {% endblock %}

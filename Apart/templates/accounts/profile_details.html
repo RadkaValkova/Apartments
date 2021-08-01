@@ -4,21 +4,21 @@
 {% block styles %}
     <style>
         body {
-            background-image: url('/static/images/double-bubble-outline.png')
+            background-image: url('/static/images/home_page_picture_changed3.jpg')
         }
     </style>
 
 {% endblock %}
 
 {% block content %}
-    <div class="container" style="background-color: whitesmoke; padding-top: 15px; padding-bottom: 15px;  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);">
+{#    <div class="container" style="background-color: whitesmoke; padding-top: 15px; padding-bottom: 30px; margin-bottom: 20px">#}
         <div class="text-lg-center">
             <h2>Здравейте, {{ profile.first_name }}!</h2>
 
             {% if profile.profile_image %}
-                <img class="mb-3" src="{{ profile.profile_image.url }}" alt="" width="170" height="150">
+                <img class="mb-3" src="{{ profile.profile_image.url }}" alt="" width="140" height="140">
             {% else %}
-                <img class="mb-3" src="{% static 'images/profile_anonimous.webp' %}" alt="" width="170" height="150">
+                <img class="mb-3" src="{% static 'images/profile_anonimous.webp' %}" alt="" width="140" height="140">
             {% endif %}
             <h6>Това е Вашият профил. В него може да видите всички публикувани от вас обяви. <br>Тяхното съдържание може
                 да бъде редактирано
@@ -29,8 +29,8 @@
                 <a href="{% url 'delete user' %}" class="btn btn-danger">Изтрий профила си</a>
             </div>
         </div>
-    </div>
-    <hr>
+{#    </div>#}
+{#    <hr>#}
     {% if aparts %}
         <div class="container">
             <h2 class='text-center'>Вашите публикувани обяви</h2>
