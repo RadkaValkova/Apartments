@@ -118,10 +118,15 @@ class ProfileForm(BootstrapFormMixin, forms.ModelForm):
         )
     )
 
-    # profile_image = forms.ImageField(
-    #     label='Профилна снимка',
-    #     widget=forms.FileInput,
-    # )
+    profile_image = forms.ImageField(
+        label='Профилна снимка',
+        widget=forms.FileInput(
+            attrs={
+                'style': 'width: 400px'
+            }),
+        required=False,
+
+    )
 
     class Meta:
         model = Profile

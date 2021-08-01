@@ -23,3 +23,4 @@ class Inquiry(models.Model):
     date = models.DateField(auto_now_add=True)
     text = models.TextField(max_length=1000)
 
+

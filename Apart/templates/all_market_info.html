@@ -27,25 +27,16 @@
     </div>
     {% for info in infos %}
         <div class="container">
-            <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne"
-                                aria-expanded="true" aria-controls="collapseOne">
-                            {{ info.title }}, {{ info.published_date }}
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                         data-bs-parent="#accordionExample" style="">
-                        <div class="accordion-body">
-                            <strong>Източник: {{ info.source }}</strong>
-                            <br>{{ info.text }}<br>
-                            <a href="{{ info.source_url }}" style="color:blue">Линк към цялата статия</a>
-                        </div>
-                    </div>
+            <div class="card" style="margin-bottom: 10px">
+                <div class="card-header" style="background-color: #2d547a; color: white">
+                    {{ info.title }}, {{ info.published_date }}
+                </div>
+                <div class="card-body" style="background-color: whitesmoke">
+                    <h6 class="card-title">{{ info.source }}</h6>
+                    <p class="card-text">{{ info.text }}<br><a href="{{ info.source_url }}" style="color:blue">Линк към цялата статия</a></p>
                 </div>
             </div>
         </div>
     {% endfor %}
 {% endblock %}
+

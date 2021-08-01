@@ -20,39 +20,24 @@
     <h2 class='text-center'>Получени запитвания</h2>
     {% for inquiry in inquiries %}
         <div class="container">
-            <div class="accordion" id="accordionExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="headingOne">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
-                                aria-expanded="true" aria-controls="collapseOne">
-                                № {{ inquiry.id }}, <b>Категория:</b> {{ inquiry.category }}
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                         data-bs-parent="#accordionExample" style="">
-                        <div class="accordion-body">
-                            <ul>
-                                <li><b>Получено на:</b> {{ inquiry.date }}</li>
-                                <li><b>Изпратил:</b> {{ inquiry.first_name }} {{ inquiry.last_name }}</li>
-                                <li><b>Описание на запитването:</b> {{ inquiry.text }}</li>
-                                <li><b>Телефон за обратна връзка:</b> {{ inquiry.phone }}</li>
-                                <li><b>e-mail:</b> {{ inquiry.email }}</li>
-                            </ul>
-                        </div>
-                    </div>
+            <div class="card" style="margin-bottom: 10px">
+                <div class="card-header" style="background-color: #2d547a; color: white">
+                    № {{ inquiry.id }}, <b>Категория:</b> {{ inquiry.category }}
+                </div>
+                <div class="card-body" style="background-color: whitesmoke">
+                    <h6 class="card-title">Изпратил: {{ inquiry.first_name }} {{ inquiry.last_name }}</h6>
+                    <p class="card-text">
+                    <ul>
+                        <li><b>Получено на:</b> {{ inquiry.date }}</li>
+                        <li><b>Описание на запитването:</b> {{ inquiry.text }}</li>
+                        <li><b>Телефон за обратна връзка:</b> {{ inquiry.phone }}</li>
+                        <li><b>e-mail:</b> {{ inquiry.email }}</li>
+                    </ul>
+                    </p>
+
                 </div>
             </div>
         </div>
-{#                <div class="container" style="background-color: whitesmoke; margin-bottom: 10px">#}
-{#                    <h5 class='text-left'><b>{{ inquiry.category }}</b></h5>#}
-{#                    <ul>#}
-{#                        <li><b>Получено на:</b> {{ inquiry.date }}</li>#}
-{#                        <li><b>Изпратил:</b> {{ inquiry.first_name }} {{ inquiry.last_name }}</li>#}
-{#                        <li><b>Описание на запитването:</b> {{ inquiry.text }}</li>#}
-{#                        <li><b>Телефон за обратна връзка:</b> {{ inquiry.phone }}</li>#}
-{#                        <li><b>e-mail:</b> {{ inquiry.email }}</li>#}
-{#                    </ul>#}
-{#                </div>#}
     {% endfor %}
 
 {% endblock %}
