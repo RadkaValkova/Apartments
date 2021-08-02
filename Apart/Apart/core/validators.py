@@ -7,13 +7,6 @@ def positive_value_validator(value):
     return value
 
 
-#
-# def max_length_validator(value, ml):
-#     if len(value) > ml:
-#         raise ValidationError(f'Уверете се, че символите не са повече от {ml}. В момента са {len(value)}')
-#     return value
-#
-
 def first_upper_letter_validator(value):
     if value[0].islower():
         raise ValidationError('Изпишете името с главна буква')

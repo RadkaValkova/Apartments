@@ -51,10 +51,10 @@ class CreateApartmentForm(ApartmentForm):
         validators=[positive_value_validator]
     )
 
-    price_realized = forms.IntegerField(
-        required=False,
-        validators=[positive_value_validator]
-    )
+    # price_realized = forms.IntegerField(
+    #     required=False,
+    #     validators=[positive_value_validator]
+    # )
 
     pure_area = forms.IntegerField(
         validators=[positive_value_validator]
