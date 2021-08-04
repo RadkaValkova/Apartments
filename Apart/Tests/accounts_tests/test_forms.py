@@ -43,3 +43,5 @@ class RegisterFormTestCase(TestCase):
         user_form.save()
         registered_user = ApartUser.objects.get(email='radka@abv.bg')
         self.assertIsNotNone(registered_user)
+
+

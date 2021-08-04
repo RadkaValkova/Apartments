@@ -8,7 +8,7 @@ class InquiryModelTests(TestCase):
     valid_last_name = 'Valkova'
     valid_town = 'Plovdiv'
     valid_email = 'radka@abv.bg'
-    valid_phone = '888 888'
+    valid_phone = '888888'
     valid_category = 'друго'
     valid_date = '2021-07-30'
     valid_tex = 'text'
