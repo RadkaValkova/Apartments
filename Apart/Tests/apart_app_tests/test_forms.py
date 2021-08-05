@@ -1,5 +1,3 @@
-from django.test import TestCase
-
 from Apart.apart_app.forms import CreateApartmentForm
 
 from PIL import Image

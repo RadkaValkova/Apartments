@@ -1,7 +1,7 @@
 from django.urls import reverse
 from Tests.base.tests import ApartTestCase
 
-from Apart.apart_app.models import ApartmentModel, TypeModel, ConstructionModel, DealModel, StatusModel, \
+from Apart.apart_app.models import TypeModel, ConstructionModel, DealModel, StatusModel, \
     FinishingWorksModel, FurnishingModel
 
 
@@ -15,9 +15,8 @@ class ProfileDetailsTest(ApartTestCase):
         self.assertListEmpty(list(response.context['aparts']))
         self.assertEqual(self.user.id, response.context['profile'].user_id)
 
-    def test_getDetails_whenLoggedInUserWithPets_shouldGetDetailsWithPets(self):
-
-        apart = ApartmentModel.objects.create(
+    def test_getDetails_whenLoggedInUserWithAparts_shouldGetDetailsWithAparts(self):
+        apart = self.create_apart(
             type=TypeModel.objects.first(),
             town='Пловдив',
             construction=ConstructionModel.objects.first(),

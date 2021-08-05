@@ -30,10 +30,6 @@ def all_aparts(request):
     if deal:
         aparts_list = aparts_list.filter(deal=deal)
 
-    # context = {
-    #     'aparts': aparts_list,
-    #     'form': FilterApartsForm(initial=values),
-    # }
     context = {
         'aparts': pagination(request,aparts_list),
         'form': FilterApartsForm(initial=values),

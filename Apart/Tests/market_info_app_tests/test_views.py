@@ -1,5 +1,3 @@
-from unittest.mock import patch
-
 from django.test import TestCase, Client
 from django.urls import reverse
 
@@ -28,9 +26,4 @@ class CreateMarketInfoTests(TestCase):
         response = self.test_client.get('/marketinfo/')
         self.assertEqual(response.status_code, 200)
 
-    # @patch('Apart.market_info_app.models.MarketInfoModel.objects')
-    # def test_getarketInfo_shouldRenderOrderedObjects(self, marketinfomodel_mock):
-    #     marketinfomodel_mock.order_by('published_date').reverse().return_value = [1]
-    #     response = self.test_client.get(reverse('all market info'))
-    #     self.assertTemplateUsed(response, 'all_market_info.html')
-    #     infos = response.context['infos']
+

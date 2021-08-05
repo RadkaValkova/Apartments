@@ -51,11 +51,6 @@ class CreateApartmentForm(ApartmentForm):
         validators=[positive_value_validator]
     )
 
-    # price_realized = forms.IntegerField(
-    #     required=False,
-    #     validators=[positive_value_validator]
-    # )
-
     pure_area = forms.IntegerField(
         validators=[positive_value_validator]
     )
@@ -78,12 +73,6 @@ class CreateApartmentForm(ApartmentForm):
 
 
 class EditApartmentForm(ApartmentForm):
-    # def save(self, commit=True):
-    #     db_apart = ApartmentModel.objects.get(pk=self.instance.id)
-    #     if commit:
-    #         image_path = join(settings.MEDIA_ROOT, str(db_apart.image))
-    #         os.remove(image_path)
-    #     return super().save(commit)
 
     def save(self, commit=True):
         db_apart = ApartmentModel.objects.get(pk=self.instance.pk)

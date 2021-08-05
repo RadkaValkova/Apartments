@@ -1,6 +1,5 @@
 from django.test import TestCase
 
-
 from Apart.market_info_app.forms import CreateMarketInfoForm
 
 
