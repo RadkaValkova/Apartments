@@ -1,5 +1,4 @@
 import os
-from os.path import join
 
 from django import forms
 from django.conf import settings

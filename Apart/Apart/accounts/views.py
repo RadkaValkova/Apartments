@@ -102,18 +102,3 @@ def edit_profile(request):
         }
         return render(request, 'accounts/edit_profile.html', context)
 
-    # if request.POST:
-    #     form = ProfileForm(request.POST,request.FILES,instance=profile)
-    #     if form.is_valid():
-    #         form.save()
-    #         return redirect('profile details')
-    # else:
-    #     form = ProfileForm(
-    #         instance=profile,
-    #     )
-    #
-    # context = {
-    #     'form': form,
-    #     'profile':profile,
-    # }
-    # return render(request, 'accounts/edit_profile.html', context)

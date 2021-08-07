@@ -10,13 +10,17 @@
 
 {% block content %}
     <div class="container">
-        <form class="w-50 m-auto" method="post" style="border: 1px solid grey; margin: 10% 0%; padding: 5% 5%; background-color: whitesmoke;" action="{% url 'log in user' %}">
+        <form class="w-50 m-auto" method="post"
+              style="border: 1px solid grey; margin: 10% 0%; padding: 5% 5%; background-color: whitesmoke;"
+              action="{% url 'log in user' %}">
             <h6>За да публикувате обява, трябва да влезете в профила си.</h6>
             <h2>Вход</h2>
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Вход</button><br>
-            <span>Още не сте регистрирани?<a href="{% url 'register user' %}" style="color:orange">Регистрирайте се тук</a></span>
+            <button type="submit" class="btn btn-primary">Вход</button>
+            <br>
+            <span>Още не сте регистрирани?<a href="{% url 'register user' %}"
+                                             style="color:orange">Регистрирайте се тук</a></span>
         </form>
     </div>
 

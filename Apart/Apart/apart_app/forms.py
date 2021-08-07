@@ -1,5 +1,4 @@
 import os
-from os.path import join
 
 from django import forms
 from django.conf import settings
@@ -65,14 +64,9 @@ class CreateApartmentForm(ApartmentForm):
         label='Вид на сделката',
     )
 
-    # status = forms.ModelChoiceField(
-    #     queryset=StatusModel.objects.all(),
-    #     label='Статус на обявата',
-    # )
-
     price_offer = forms.IntegerField(
         validators=[positive_value_validator],
-        label='Офертна цена',
+        label='Офертна цена в EUR',
     )
 
     pure_area = forms.IntegerField(

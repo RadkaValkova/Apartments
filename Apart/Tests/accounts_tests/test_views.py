@@ -9,7 +9,6 @@ class ProfileDetailsTest(ApartTestCase):
 
     def test_getDetails_whenLoggedInUserWithoutAparts_shouldGetDetailsWithoutAparts(self):
         self.client.force_login(self.user)
-
         response = self.client.get(reverse('profile details'))
 
         self.assertListEmpty(list(response.context['aparts']))
@@ -17,18 +16,18 @@ class ProfileDetailsTest(ApartTestCase):
 
     def test_getDetails_whenLoggedInUserWithAparts_shouldGetDetailsWithAparts(self):
         apart = self.create_apart(
-            type=TypeModel.objects.first(),
+            type=self.create_type_instance(),
             town='Пловдив',
-            construction=ConstructionModel.objects.first(),
+            construction=self.create_construction_instance(),
             construction_year='2021',
-            deal=DealModel.objects.first(),
-            status=StatusModel.objects.first(),
+            deal=self.create_deal_instance(),
+            status=self.create_status_instance(),
             price_offer=20000,
             price_realized=0,
             pure_area=50,
             total_area=50,
-            finishing_works=FinishingWorksModel.objects.first(),
-            furnishing=FurnishingModel.objects.first(),
+            finishing_works=self.create_fifnishing_works_instance(),
+            furnishing=self.create_furnishing_instance(),
             description='описание',
             image='image.jpg',
             date='2021-07-30',
@@ -38,7 +37,6 @@ class ProfileDetailsTest(ApartTestCase):
         )
 
         self.client.force_login(self.user)
-
         response = self.client.get(reverse('profile details'))
 
         self.assertEqual(200, response.status_code)

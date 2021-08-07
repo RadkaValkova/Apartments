@@ -1,9 +1,7 @@
 from django import forms
 
 from Apart.core.validators import first_upper_letter_validator, is_all_digits_validator
-from Apart.inquiry.inquiry_choices import CATEGORY_CHOICES
 from Apart.inquiry.models import Inquiry, CategoryModel
-from django.utils.translation import gettext_lazy as _
 
 
 class BootstrapFormMixin:
@@ -25,7 +23,7 @@ class InquiryForm(forms.ModelForm, BootstrapFormMixin):
 
     category = forms.ModelChoiceField(
         queryset=CategoryModel.objects.all(),
-        label='Категория',
+        label='Категория на запитването',
     )
 
     first_name = forms.CharField(
@@ -39,7 +37,7 @@ class InquiryForm(forms.ModelForm, BootstrapFormMixin):
         max_length=15,
         validators=[first_upper_letter_validator],
         label='Фамилия',
-        error_messages={'max_length': _('Полето трябва да съдържа до 15 символа.')}
+        error_messages={'max_length': 'Полето трябва да съдържа до 15 символа.'}
     )
 
     town = forms.CharField(

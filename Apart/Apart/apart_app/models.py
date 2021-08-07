@@ -1,17 +1,10 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-from Apart.apart_app.apart_choices import STATUS_CHOICES, CONSTRUCTION_CHOICES, FURNISHING_CHOICES, TOWN_CHOICES, \
+from Apart.apart_app.apart_choices import STATUS_CHOICES, CONSTRUCTION_CHOICES, FURNISHING_CHOICES, \
     TYPE_CHOICES, DEAL_CHOICES, FINISHING_CHOICES
 
 UserModel = get_user_model()
-
-
-class TownModel(models.Model):
-    name = models.CharField(max_length=20, choices=TOWN_CHOICES, )
-
-    def __str__(self):
-        return f'{self.name}'
 
 
 class TypeModel(models.Model):
@@ -113,7 +106,7 @@ class ApartmentModel(models.Model):
     )
     date = models.DateTimeField(
         auto_now_add=True,
-    )  # blank=False
+    )
 
     email = models.EmailField()
 

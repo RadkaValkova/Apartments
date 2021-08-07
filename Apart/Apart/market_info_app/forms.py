@@ -48,14 +48,6 @@ class CreateMarketInfoForm(MarketInfoForm):
     )
 
 
-# class EditMarketInfoForm(MarketInfoForm):
-#     pass
-#
-#
-# class DeleteMarketInfoForm(MarketInfoForm):
-#     pass
-
-
 class SearchMarketInfoForm(forms.Form):
     id = forms.IntegerField(
         required=False,

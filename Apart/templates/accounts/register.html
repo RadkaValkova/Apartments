@@ -9,23 +9,26 @@
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid" style="background-image: none;">
-    <div class="row">
-    <div class="col-lg-3"></div>
-    <div class="col-lg-6">
-          <form style="background-color: whitesmoke; border: 1px solid grey; margin: 10% 0%; padding: 10% 5%" method="post">
-            <h2>Моля, попълнете формата за регистрация</h2>
-            {% csrf_token %}
-              {{ form.as_ul }}
-              <p>Паролата Ви не може да бъде твърде подобна на другите Ви лични данни.<br>
-                  Паролата Ви трябва да съдържа поне 8 знака.<br>
-                  Паролата Ви не може да бъде често използвана парола.<br>
-                  Паролата Ви не може да бъде изцяло цифрова.</p>
-            <button class="btn btn-primary" type="submit">Регистрирай се</button><br>
-            <span>Вече имате профил?<a href="{% url 'log in user' %}" style="color:orange">Влезте в профила си</a></span>
-          </form>
-    </div>
-    <div class="col-lg-3"></div>
+    <div class="container-fluid" style="background-image: none;">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <form style="background-color: whitesmoke; border: 1px solid grey; margin: 10% 0%; padding: 10% 5%"
+                      method="post">
+                    <h2>Моля, попълнете формата за регистрация</h2>
+                    {% csrf_token %}
+                    {{ form.as_ul }}
+                    <p>Паролата Ви не може да бъде твърде подобна на другите Ви лични данни.<br>
+                        Паролата Ви трябва да съдържа поне 8 знака.<br>
+                        Паролата Ви не може да бъде често използвана парола.<br>
+                        Паролата Ви не може да бъде изцяло цифрова.</p>
+                    <button class="btn btn-primary" type="submit">Регистрирай се</button>
+                    <br>
+                    <span>Вече имате профил?<a href="{% url 'log in user' %}"
+                                               style="color:orange">Влезте в профила си</a></span>
+                </form>
+            </div>
+            <div class="col-lg-3"></div>
         </div>
-</div>
+    </div>
 {% endblock %}

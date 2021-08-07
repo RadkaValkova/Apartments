@@ -41,13 +41,12 @@
                 {% endfor %}
             {% else %}
                 <div class="col-12" style="text-align: center; font-size: 20px; font-style: italic; color: orangered">
-                {{ message }}
+                    {{ message }}
                 </div>
             {% endif %}
         </div>
     </div>
 
-    {#{% if is_paginated %}#}
     <div class="" style="text-align: center; padding-top: 30px; font-size: 15px;">
         {% if aparts.has_previous %}
             <a href="?{% param_replace page=1 %}">Първа</a>
@@ -67,6 +66,4 @@
 
         <p>Брой обекти {{ aparts.start_index }}—{{ aparts.end_index }}</p>
     </div>
-    {#{% endif %}#}
-
 {% endblock %}

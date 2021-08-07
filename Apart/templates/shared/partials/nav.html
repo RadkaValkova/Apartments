@@ -12,7 +12,6 @@
             <li><a class="nav-link" href="{% url 'create inquiry' %}">Запитване</a></li>
             <li><a class="nav-link" href="{% url 'all market info' %}">Пазарна информация</a></li>
         </ul>
-        {#        <ul class="nav nav" >#}
         {% if request.user.is_authenticated %}
             <ul class="nav nav">
                 <li class="nav-item ">
@@ -39,7 +38,7 @@
                 </li>
             </ul>
         {% endif %}
-        {#        </ul>#}
+
     </div>
 
 </nav>
