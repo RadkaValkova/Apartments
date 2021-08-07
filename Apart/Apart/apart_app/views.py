@@ -5,7 +5,7 @@ from django.shortcuts import render, redirect
 from Apart.apart_app.forms import CreateApartmentForm, EditApartmentForm, FilterApartsForm
 from Apart.apart_app.models import ApartmentModel
 
-from Apart.core.views import pagination, get_filter_values
+from Apart.core.views import pagination, get_filter_apart_values
 
 
 def home_page(request):
@@ -14,8 +14,8 @@ def home_page(request):
 
 def all_aparts(request):
     aparts_list = ApartmentModel.objects.filter(status__name='активна обява').order_by('id').reverse()
-
-    values = get_filter_values(request.GET)
+    message = ''
+    values = get_filter_apart_values(request.GET)
     town = values['town']
     type = values['type']
     construction = values['construction']
@@ -30,9 +30,13 @@ def all_aparts(request):
     if deal:
         aparts_list = aparts_list.filter(deal=deal)
 
+    if not aparts_list:
+        message = 'Няма намерени резултати от Вашето търсене.'
+
     context = {
         'aparts': pagination(request,aparts_list),
         'form': FilterApartsForm(initial=values),
+        'message': message,
     }
 
     return render(request, 'aparts/all_aparts.html', context)

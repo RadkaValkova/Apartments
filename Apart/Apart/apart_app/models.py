@@ -1,10 +1,10 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-UserModel = get_user_model()
-
 from Apart.apart_app.apart_choices import STATUS_CHOICES, CONSTRUCTION_CHOICES, FURNISHING_CHOICES, TOWN_CHOICES, \
     TYPE_CHOICES, DEAL_CHOICES, FINISHING_CHOICES
+
+UserModel = get_user_model()
 
 
 class TownModel(models.Model):
@@ -123,4 +123,3 @@ class ApartmentModel(models.Model):
         UserModel,
         on_delete=models.CASCADE,
     )
-

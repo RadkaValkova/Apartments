@@ -3,6 +3,7 @@ from django.test import TestCase, Client
 
 from Apart.apart_app.models import TypeModel, ConstructionModel, DealModel, StatusModel, FinishingWorksModel, \
     FurnishingModel, ApartmentModel
+from Apart.inquiry.models import CategoryModel
 
 UserModel = get_user_model()
 
@@ -48,3 +49,6 @@ class ApartTestCase(TestCase):
 
     def create_furnishing_instance(self):
         return FurnishingModel.objects.create(name='обзаведен')
+
+    def create_category_instance(self):
+        return CategoryModel.objects.create(name='друго')

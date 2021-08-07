@@ -9,6 +9,7 @@ from Tests.base.tests import ApartTestCase
 class HomePageTests(ApartTestCase):
     def test_whenHomePageLoadsSuccessfully(self):
         response = self.client.get('')
+        self.assertEqual(response.status_code, 200)
         self.assertTemplateNotUsed(response, 'testing/home_page.html')
 
 
@@ -22,8 +23,6 @@ class CreateApartmentsTests(ApartTestCase):
     def test_createApartmentIsNotPossible_WhenUserNotLoggedIn(self):
         response = self.client.get('/create/')
         self.assertEqual(response.status_code, 302)
-        url = response['location']
-        self.assertIn('accounts/login/', url)
 
     def test_getApartmentCreateForm_shouldRenderTemplate_IfLogin(self):
         self.client.force_login(self.user)
@@ -33,8 +32,9 @@ class CreateApartmentsTests(ApartTestCase):
 
 class ApartmentDetailsTests(ApartTestCase):
 
-    def test_getAllInquiries_shouldRenderTemplate(self):
+    def test_getAllAparts_shouldRenderTemplate(self):
         response = self.client.get(reverse('all aparts'))
+        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'aparts/all_aparts.html')
 
     def test_getApartDetails_whenApartExistsAndIsSelfUser_shouldReturnDetailsForSelfUser(self):
@@ -88,5 +88,6 @@ class ApartmentDetailsTests(ApartTestCase):
         response = self.client.get(reverse('apart details', kwargs={'pk': apart.id}))
         self.assertFalse(response.context['is_user'])
 
-    def test_filterAparts(self):
-        pass
+
+
+

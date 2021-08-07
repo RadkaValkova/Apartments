@@ -15,76 +15,11 @@
     <h1 class="display-6 text-center">Моля, попълнете формата!</h1>
     <div class="container"
          style="background-image: url('/static/images/home_page_picture_changed.jpg'); margin-bottom: 10px; padding-left: 300px; padding-right: 300px">
-        <form method="post"  action="{% url 'edit' apart.id %}" enctype="multipart/form-data">
+        <form method="post" action="{% url 'edit' apart.id %}" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ form.errors }}
-            <div class="row">
-                <div class="col">
-                    <label for="id_type">Вид</label>
-                    {{ form.type }}
-                </div>
-                <div class="col">
-                    <label for="id_town">Град</label>
-                    {{ form.town }}
-                </div>
-            </div>
-
-            <label for="id_construction">Конструкция</label>
-            {{ form.construction }}
-
-            <label for="id_construction_year">Година на построяване</label>
-            {{ form.construction_year }}
-
-            <div class="row">
-                <div class="col">
-                    <label for="id_deal">Вид сделка</label>
-                    {{ form.deal }}
-                </div>
-                <div class="col">
-                    <label for="id_status">Статус</label>
-                    {{ form.status }}
-                </div>
-            </div>
-
-            <label for="id_price_offer">Офертна цена</label>
-            {{ form.price_offer }}
-
-            {#            <label for="id_price_realized">Реализирана цена</label>#}
-            {#            {{ form.price_realized }}#}
-
-            <div class="row">
-                <div class="col">
-                    <label for="id_pure_area">Чиста жилищна площ / ЗП</label>
-                    {{ form.pure_area }}
-                </div>
-                <div class="col">
-                    <label for="id_total_area">Брутна площ / РЗП</label>
-                    {{ form.total_area }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <label for="id_finishing_works">Довършителни работи</label>
-                    {{ form.finishing_works }}
-                </div>
-                <div class="col">
-                    <label for="id_furnishing">Обзавеждане</label>
-                    {{ form.furnishing }}
-                </div>
-            </div>
-
-            <label for="id_description">Описание</label>
-            {{ form.description }}
-
-            <label for="id_picture">Снимка</label>
-            {{ form.image }}
-
-            <label for="id_email">e-mail</label>
-            {{ form.email }}
-
-            <label for="id_contact_phone">Телефон за контакт</label>
-            {{ form.contact_phone }}
-
+            {% for field in form %}
+                {{ field.label }}{{ field }}{{ field.errors }}
+            {% endfor %}
             <div style="margin-top:10px; padding-bottom: 10px; text-align: center">
                 <button type="submit" class="btn btn-lg btn-success">Редактирай</button>
                 <a class="btn btn-primary" href="{% url 'apart details' apart.id %}">Откажи</a>

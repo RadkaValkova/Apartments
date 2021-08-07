@@ -17,28 +17,11 @@
          style="background-image: url('/static/images/home_page_picture_changed.jpg'); margin-bottom: 10px">
         <form method="post" class="m-auto w-25">
             {% csrf_token %}
-            {{ form.errors }}
 
-            <label for="id_first_name">Категория/тема</label>
-            {{ form.category }}
-
-            <label for="id_first_name">Име</label>
-            {{ form.first_name }}
-
-            <label for="id_last_name">Презиме</label>
-            {{ form.last_name }}
-
-            <label for="id_town">Град</label>
-            {{ form.town }}
-
-            <label for="id_phone">Телефон за обратна връзка:</label>
-            {{ form.phone }}
-
-            <label for="id_email">e-mail</label>
-            {{ form.email }}
-
-            <label for="id_text">Вашето запитване</label>
-            {{ form.text }}
+            {% for field in form %}
+                {{ field.label }}{{ field }}{{ field.errors }}
+            {% endfor %}
+        
             <div style="margin-top:10px; padding-bottom: 10px; text-align: center">
                 <button type="submit" class="btn btn-lg btn-success">Изпрати</button>
                 <a class="btn btn-primary" href="{% url 'home page' %}">Откажи</a>

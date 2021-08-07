@@ -1,13 +1,14 @@
 from django.test import TestCase
 
 from Apart.inquiry.forms import InquiryForm
+from Tests.base.tests import ApartTestCase
 
 
-class CreateInquiryFormTests(TestCase):
+class CreateInquiryFormTests(ApartTestCase):
 
     def test_saveInquiryForm_whenValid(self):
         data = {
-            'category': 'друго',
+            'category': self.create_category_instance(),
             'first_name': 'Радка',
             'last_name': 'Вълкова',
             'town': 'Пловдив',
@@ -23,7 +24,7 @@ class CreateInquiryFormTests(TestCase):
 
     def test_saveInquiryForm_FirstNameInvalidStartsLowerCase(self):
         data = {
-            'category': 'друго',
+            'category': self.create_category_instance(),
             'first_name': 'радка',
             'last_name': 'Вълкова',
             'town': 'Пловдив',
@@ -37,7 +38,7 @@ class CreateInquiryFormTests(TestCase):
 
     def test_saveInquiryForm_LastNameInvalidStartsLowerCase(self):
         data = {
-            'category': 'друго',
+            'category': self.create_category_instance(),
             'first_name': 'Радка',
             'last_name': 'вълкова',
             'town': 'Пловдив',
@@ -51,7 +52,7 @@ class CreateInquiryFormTests(TestCase):
 
     def test_saveInquiryForm_TownInvalidStartsLowerCase(self):
         data = {
-            'category': 'друго',
+            'category': self.create_category_instance(),
             'first_name': 'Радка',
             'last_name': 'Вълкова',
             'town': 'пловдив',
@@ -65,7 +66,7 @@ class CreateInquiryFormTests(TestCase):
 
     def test_saveInquiryForm_PhoneInvalidNotIsAllDigits(self):
         data = {
-            'category': 'друго',
+            'category': self.create_category_instance(),
             'first_name': 'Радка',
             'last_name': 'Вълкова',
             'town': 'Пловдив',

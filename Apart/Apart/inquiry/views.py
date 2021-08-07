@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from Apart.core.views import get_filter_values
+from Apart.core.views import get_filter_inquiry_values, pagination
 from Apart.inquiry.forms import InquiryForm, FilterInquiryForm
 from Apart.inquiry.models import Inquiry
 
@@ -25,7 +25,7 @@ def create_inquiry(request):
 def all_inquiries(request):
     inquiries = Inquiry.objects.order_by('id').reverse()
 
-    values = get_filter_values(request.GET)
+    values = get_filter_inquiry_values(request.GET)
     category = values['category']
     first_name = values['first_name']
     last_name = values['last_name']
@@ -38,7 +38,7 @@ def all_inquiries(request):
         inquiries = inquiries.filter(last_name__icontains=last_name)
 
     context = {
-        'inquiries': inquiries,
+        'inquiries': pagination(request,inquiries),
         'form': FilterInquiryForm(initial=values),
     }
     return render(request, 'inquiries/all_inquiries.html', context)

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 from Apart.inquiry.inquiry_choices import CATEGORY_CHOICES
 
@@ -19,7 +20,7 @@ class Inquiry(models.Model):
     town = models.CharField(max_length=15)
     email = models.EmailField(max_length=30)
     phone = models.CharField(max_length=20)
-    category = models.CharField(choices=CATEGORY_CHOICES, max_length=30)
+    category = models.ForeignKey(CategoryModel, on_delete=models.SET_NULL, null=True,)
     date = models.DateField(auto_now_add=True)
     text = models.TextField(max_length=1000)
 

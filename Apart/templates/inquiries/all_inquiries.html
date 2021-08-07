@@ -1,4 +1,5 @@
 {% extends 'shared/base_tamplete.html' %}
+{% load my_tags %}
 
 {% block head_title %}Запитвания{% endblock %}
 
@@ -39,5 +40,23 @@
             </div>
         </div>
     {% endfor %}
+ <div class="" style="text-align: center; padding-top: 30px; font-size: 15px;">
+        {% if inquiries.has_previous %}
+            <a href="?{% param_replace page=1 %}">Първа</a>
+            {% if inquiries.previous_page_number != 1 %}
+                <a href="?{% param_replace page=inquiries.previous_page_number %}">Предходна</a>
+            {% endif %}
+        {% endif %}
 
+        Страница {{ inquiries.number }} от {{ paginator.num_pages }}
+
+        {% if inquiries.has_next %}
+            {% if inquiries.next_page_number != paginator.num_pages %}
+                <a href="?{% param_replace page=inquiries.next_page_number %}">Следваща</a>
+            {% endif %}
+            <a href="?{% param_replace page=paginator.num_pages %}">Последна</a>
+        {% endif %}
+
+        <p>Брой обекти {{ inquiries.start_index }}—{{ inquiries.end_index }}</p>
+    </div>
 {% endblock %}

@@ -2,14 +2,14 @@ from django.test import TestCase, Client
 from django.urls import reverse
 
 from Apart.market_info_app.forms import CreateMarketInfoForm
+from Tests.base.tests import ApartTestCase
 
 
-class CreateMarketInfoTests(TestCase):
-    def setUp(self):
-        self.test_client = Client()
+class CreateMarketInfoTests(ApartTestCase):
 
     def test_getAllMarketInfo_shouldRenderTemplate(self):
-        response = self.test_client.get(reverse('all market info'))
+        response = self.client.get(reverse('all market info'))
+        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'all_market_info.html')
 
     def test_displayAllMarketInfo_AfterCreate(self):
@@ -21,9 +21,9 @@ class CreateMarketInfoTests(TestCase):
             'source_url': 'https://source.com'
         }
         new_market_info = CreateMarketInfoForm(data=data)
-        self.test_client.login()
+        self.client.login()
         new_market_info.save()
-        response = self.test_client.get('/marketinfo/')
+        response = self.client.get('/marketinfo/')
         self.assertEqual(response.status_code, 200)
 
 
