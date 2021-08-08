@@ -12,7 +12,12 @@ class CreateMarketInfoTests(ApartTestCase):
 
     def test_createMarketInfoIsPossible_WhenUserIsSuperuser(self):
         self.client.force_login(self.super_user)
-        response = self.client.get('/create/')
+        response = self.client.get(reverse('create market info'))
+        self.assertEqual(response.status_code, 200)
+
+    def test_createMarketInfoNotPossible_WhenUserNotSuperuser(self):
+        self.client.force_login(self.user)
+        response = self.client.get(reverse('create market info'))
         self.assertEqual(response.status_code, 200)
 
 
