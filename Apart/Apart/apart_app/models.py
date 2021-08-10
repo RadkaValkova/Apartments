@@ -49,7 +49,7 @@ class FinishingWorksModel(models.Model):
         return f'{self.name}'
 
 
-class ApartmentModel(models.Model):
+class ApartmentModel(models.Model):  # verbose names
     type = models.ForeignKey(
         TypeModel,
         on_delete=models.SET_NULL,

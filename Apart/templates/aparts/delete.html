@@ -14,7 +14,7 @@
     <div class="container" style="margin-bottom: 10px; text-align: center; padding-top:50px;padding-bottom: 50px;">
         <h1>Сигурни ли сте, че искате да изтриете обява с код номер - {{ apart.pk }}?</h1>
         <h5> /{{ apart.type }}, {{ apart.town }}, РЗП: {{ apart.total_area }}, {{ apart.description }}/</h5>
-        <h5>Ако желаете обявата да остане във Вашето портфолио, но да не бъде видима за останалите потребители,
+        <h5 style="color: red">Ако желаете обявата да остане във Вашето портфолио, но да НЕ бъде видима за останалите потребители,
         сменете статусът й от активна на неактивна обява.</h5>
         <div class="m-auto d-flex justify-content-center">
             <form action="{% url 'delete' apart.id %}" method="post" enctype="multipart/form-data">

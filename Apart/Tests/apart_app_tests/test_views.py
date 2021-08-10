@@ -124,6 +124,7 @@ class EditApartmentTests(ApartTestCase):
     image = InMemoryUploadedFile(im_io, None, 'random-name.jpg', 'image/jpeg', len(im_io.getvalue()), None)
 
     def test_editPossible_whenUserIsApartmentOwner(self):
+
         self.client.force_login(self.user)
         apart = self.create_apart(
             type=self.create_type_instance(),

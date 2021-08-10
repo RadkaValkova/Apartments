@@ -1,4 +1,7 @@
 from django.urls import reverse
+
+from Apart.accounts.forms import RegisterForm
+from Apart.accounts.models import ApartUser
 from Tests.base.tests import ApartTestCase
 
 from Apart.apart_app.models import TypeModel, ConstructionModel, DealModel, StatusModel, \
@@ -42,3 +45,5 @@ class ProfileDetailsTest(ApartTestCase):
         self.assertEqual(200, response.status_code)
         self.assertEqual(self.user.id, response.context['profile'].user_id)
         self.assertListEqual([apart], list(response.context['aparts']))
+
+

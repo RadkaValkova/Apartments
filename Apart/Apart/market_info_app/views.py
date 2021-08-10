@@ -33,7 +33,7 @@ def all_market_info(request):
     key_word = values['key_word']
 
     if key_word:
-        infos = infos.filter(text__icontains=key_word)
+        infos = infos.filter(text__icontains=key_word).filter(title__icontains=key_word)
 
     if not infos:
         message = 'Няма намерени резултати от Вашето търсене.'
