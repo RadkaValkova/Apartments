@@ -1,3 +1,5 @@
+import tempfile
+
 from Apart.apart_app.forms import CreateApartmentForm
 
 from PIL import Image
@@ -31,13 +33,13 @@ class ApartmentModelFormTest(ApartTestCase):
             'email': 'radka@abv.bg',
             'contact_phone': '777777',
         }
+        # file_dict = {'file': tempfile.NamedTemporaryFile(suffix="_test.jpg").name,}
         file_dict = {'image': self.image}
 
         form = CreateApartmentForm(data=data, files=file_dict)
         self.assertTrue(form.is_valid(), form.errors)
 
     def test_saveApartmentForm_townInvalidStartsLowerCase(self):
-
         data = {
             'type': self.create_type_instance(),
             'town': 'пловдив',
@@ -57,10 +59,10 @@ class ApartmentModelFormTest(ApartTestCase):
         }
         file_dict = {'image': self.image}
         form = CreateApartmentForm(data=data, files=file_dict)
+        self.assertEqual(form.errors['town'], ['Изпишете името с главна буква'])
         self.assertFalse(form.is_valid())
 
     def test_saveApartmentForm_constructionYearInvalidNotAllDigit(self):
-
         data = {
             'type': self.create_type_instance(),
             'town': 'Пловдив',
@@ -80,10 +82,10 @@ class ApartmentModelFormTest(ApartTestCase):
         }
         file_dict = {'image': self.image}
         form = CreateApartmentForm(data=data, files=file_dict)
+        self.assertEqual(form.errors['construction_year'], ['Полето може да съдържа само цифри'])
         self.assertFalse(form.is_valid())
 
     def test_saveApartmentForm_priceOfferInvalidNotPositive(self):
-
         data = {
             'type': self.create_type_instance(),
             'town': 'Пловдив',
@@ -104,6 +106,7 @@ class ApartmentModelFormTest(ApartTestCase):
 
         file_dict = {'image': self.image}
         form = CreateApartmentForm(data=data, files=file_dict)
+        self.assertEqual(form.errors['price_offer'], ['Моля, попълнете стойност по-голяма от нула'])
         self.assertFalse(form.is_valid())
 
     def test_saveApartmentForm_pureAreaInvalidNotPositive(self):
@@ -127,6 +130,7 @@ class ApartmentModelFormTest(ApartTestCase):
 
         file_dict = {'image': self.image}
         form = CreateApartmentForm(data=data, files=file_dict)
+        self.assertEqual(form.errors['pure_area'], ['Моля, попълнете стойност по-голяма от нула'])
         self.assertFalse(form.is_valid())
 
     def test_saveApartmentForm_totalAreaInvalidNotPositive(self):
@@ -150,6 +154,7 @@ class ApartmentModelFormTest(ApartTestCase):
 
         file_dict = {'image': self.image}
         form = CreateApartmentForm(data=data, files=file_dict)
+        self.assertEqual(form.errors['total_area'], ['Моля, попълнете стойност по-голяма от нула'])
         self.assertFalse(form.is_valid())
 
     def test_saveApartmentForm_contactPhoneInvalidNotAllDigit(self):
@@ -173,4 +178,5 @@ class ApartmentModelFormTest(ApartTestCase):
 
         file_dict = {'image': self.image}
         form = CreateApartmentForm(data=data, files=file_dict)
+        self.assertEqual(form.errors['contact_phone'], ['Полето може да съдържа само цифри'])
         self.assertFalse(form.is_valid())

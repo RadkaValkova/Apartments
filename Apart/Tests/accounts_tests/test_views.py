@@ -1,11 +1,6 @@
 from django.urls import reverse
 
-from Apart.accounts.forms import RegisterForm
-from Apart.accounts.models import ApartUser
 from Tests.base.tests import ApartTestCase
-
-from Apart.apart_app.models import TypeModel, ConstructionModel, DealModel, StatusModel, \
-    FinishingWorksModel, FurnishingModel
 
 
 class ProfileDetailsTest(ApartTestCase):
@@ -46,4 +41,18 @@ class ProfileDetailsTest(ApartTestCase):
         self.assertEqual(self.user.id, response.context['profile'].user_id)
         self.assertListEqual([apart], list(response.context['aparts']))
 
+
+class LoginTests(ApartTestCase):
+
+    def test_loginSuccessful(self):
+        login = self.client.login(username='ivailo@abv.bg', password='parolata123')
+        self.assertTrue(login)
+
+    def test_loginUnsuccessful_whenPasswordInvalid(self):
+        login = self.client.login(username='ivailo@abv.bg', password='parolata')
+        self.assertFalse(login)
+
+    def test_loginUnsuccessful_whenUsernameInvalid(self):
+        login = self.client.login(username='iv@abv.bg', password='parolata123')
+        self.assertFalse(login)
 
